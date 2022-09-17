@@ -1,0 +1,42 @@
+.footer {
+  background: #0EA5A01A !important;
+
+  &__text {
+    font-family: 'Dank Mono Italic' !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    font-style: italic !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  &__loveIcon {
+    font-size: 0.8rem !important;
+    color: #f60202b2 !important;
+    animation: fade-in-out 1.5s infinite;
+  }
+
+  @keyframes fade-in-out {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  &__link {
+    text-decoration: none !important;
+
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
+
+  &__socialIcons {
+    font-size: 1.4rem !important;
+  }
+}
