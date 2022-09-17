@@ -29,7 +29,6 @@ const PlaylistForm = ({ open, handleClose }) => {
         </DialogContentText>
         <TextField
           onChange={(e) => setText(e.target.value)}
-          autoFocus
           margin='dense'
           label='Enter playlist ID or Link'
           fullWidth
