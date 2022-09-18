@@ -8,14 +8,27 @@ import {
   TextField,
 } from '@mui/material';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchVideos } from '../../redux/features/playlist/playlistSlice';
 import styles from './PlaylistForm.module.scss';
 
 const PlaylistForm = ({ open, handleClose }) => {
-  const [text, setText] = useState('');
+  const [playlistId, setPlaylistId] = useState('');
+  const dispatch = useDispatch();
+  const {isLoading, isError, error} = useSelector(state => state.playlist)
+
+  if (playlistId.includes('youtube.com/watch?')) {
+    const match = /[&|\?]list=([a-zA-Z0-9_-]+)/gi.exec(playlistId);
+    setPlaylistId(match[1]);
+  }
+
+  console.log(error)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(text);
+    if (playlistId) {
+      dispatch(fetchVideos(playlistId));
+    }
   };
 
   return (
@@ -28,7 +41,7 @@ const PlaylistForm = ({ open, handleClose }) => {
           fetch the playlist information.
         </DialogContentText>
         <TextField
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => setPlaylistId(e.target.value)}
           margin='dense'
           label='Enter playlist ID or Link'
           fullWidth
@@ -63,7 +76,7 @@ const PlaylistForm = ({ open, handleClose }) => {
           onClick={handleSubmit}
           variant='contained'
           disableRipple
-          disabled={!text}
+          disabled={!playlistId}
         >
           + Add Playlist
         </Button>
