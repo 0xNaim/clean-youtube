@@ -2,18 +2,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import getPlaylist from './playlistApi';
 
 const initialState = {
-  videos: [],
+  playlist: {},
   isLoading: false,
   isError: false,
   error: '',
 };
 
 // Async thunk
-export const fetchVideos = createAsyncThunk(
-  'playlist/fetchVideos',
+export const fetchPlaylist = createAsyncThunk(
+  'playlist/fetchPlaylist',
   async (playlistId) => {
-    const videos = await getPlaylist(playlistId);
-    return videos;
+    const playlist = await getPlaylist(playlistId);
+    return playlist;
   }
 );
 
@@ -22,20 +22,20 @@ const playlistSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchVideos.pending, (state) => {
+      .addCase(fetchPlaylist.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
         state.error = '';
       })
-      .addCase(fetchVideos.fulfilled, (state, action) => {
+      .addCase(fetchPlaylist.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.error = '';
-        state.videos.push(action.payload)
+        state.playlist = { ...state.playlist, ...action.payload };
       })
-      .addCase(fetchVideos.rejected, (state, action) => {
+      .addCase(fetchPlaylist.rejected, (state, action) => {
         state.isLoading = false;
-        state.videos = [];
+        state.playlist = [];
         state.isError = true;
         state.error = action?.error?.message;
       });

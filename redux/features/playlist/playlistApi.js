@@ -18,7 +18,6 @@ const getPlaylist = async (playlistId) => {
   const { data } = await axios.get(URL);
 
   let playlistItems = await getPlaylistItems(playlistId);
-  console.log('Naim', playlistItems);
 
   const {
     title: playlistTitle,
@@ -44,13 +43,15 @@ const getPlaylist = async (playlistId) => {
   });
 
   return {
-    playlistId,
-    playlistTitle,
-    playlistDescription,
-    playlistThumbnail: thumbnails.default,
-    channelId,
-    channelTitle,
-    playlistItems,
+    [playlistId]: {
+      playlistId,
+      playlistTitle,
+      playlistDescription,
+      playlistThumbnail: thumbnails.default,
+      channelId,
+      channelTitle,
+      playlistItems,
+    },
   };
 };
 

@@ -1,14 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
-import apiSlice from './features/api/apiSlice';
-import playlistSlice from './features/playlist/playlistSlice';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import playlistReducer from './features/playlist/playlistSlice';
 
-const store = configureStore({
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, playlistReducer);
+
+export const store = configureStore({
   reducer: {
-    [apiSlice.reducerPath]: apiSlice.reducer,
-    playlist: playlistSlice,
+    playlists: persistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware),
+    getDefaultMiddleware({ serializableCheck: false }),
 });
 
-export default store;
+export const persistor = persistStore(store);
