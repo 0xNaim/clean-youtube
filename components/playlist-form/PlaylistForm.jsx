@@ -78,7 +78,7 @@ const PlaylistForm = ({ open, handleClose }) => {
               label: {
                 fontFamily: 'Dank Mono Italic',
                 fontWeight: 700,
-                fontStyle: 'italic',
+                fontSize: 16
               },
             }}
           />
@@ -89,6 +89,7 @@ const PlaylistForm = ({ open, handleClose }) => {
             onClick={handleClose}
             variant='contained'
             disableRipple
+            sx={{ marginRight: { xs:0, md: 2}}}
           >
             Cancel
           </Button>
