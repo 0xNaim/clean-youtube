@@ -31,13 +31,13 @@ const getPlaylist = async (playlistId) => {
     const {
       title,
       description,
-      thumbnails: { medium },
+      thumbnails: { high },
     } = item.snippet;
 
     return {
       title,
       description,
-      thumbnail: medium,
+      thumbnail: high,
       contentDetails: item.contentDetails,
     };
   });
@@ -47,7 +47,7 @@ const getPlaylist = async (playlistId) => {
       playlistId,
       playlistTitle,
       playlistDescription,
-      playlistThumbnail: thumbnails.default,
+      playlistThumbnail: thumbnails.high,
       channelId,
       channelTitle,
       playlistItems,

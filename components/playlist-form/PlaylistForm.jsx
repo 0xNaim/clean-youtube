@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPlaylist } from '../../redux/features/playlist/playlistSlice';
+import { fetchPlaylist } from '../../redux/playlist/playlistSlice';
 import styles from './PlaylistForm.module.scss';
 
 const PlaylistForm = ({ open, handleClose }) => {
@@ -108,7 +108,7 @@ const PlaylistForm = ({ open, handleClose }) => {
         <Snackbar
           open={openSnackbar}
           autoHideDuration={3000}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
           onClose={snackbarCloseHandler}
         >
           <Alert
@@ -125,7 +125,7 @@ const PlaylistForm = ({ open, handleClose }) => {
         <Snackbar
           open={openSnackbar}
           autoHideDuration={3000}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
           onClose={snackbarCloseHandler}
         >
           <Alert
@@ -142,7 +142,7 @@ const PlaylistForm = ({ open, handleClose }) => {
         <Snackbar
           open={openSnackbar}
           autoHideDuration={3000}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
           onClose={snackbarCloseHandler}
         >
           <Alert

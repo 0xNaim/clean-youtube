@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import playlistReducer from './features/playlist/playlistSlice';
+import playlistReducer from './playlist/playlistSlice';
 
 const persistConfig = {
   key: 'root',
