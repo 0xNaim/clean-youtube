@@ -21,31 +21,39 @@ const PlaylistForm = ({ open, handleClose }) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const dispatch = useDispatch();
-  const { playlist, error: responseError } = useSelector(
-    (state) => state.playlists
-  );
+  const { playlist } = useSelector((state) => state.playlists);
 
   if (playlistId.includes('youtube.com/watch?')) {
     const match = /[&|\?]list=([a-zA-Z0-9_-]+)/gi.exec(playlistId);
     setPlaylistId(match[1]);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (playlist[playlistId]) {
-      setErrorMessage('Playlist already exist!');
       setSuccessMessage('');
       setOpenSnackbar(true);
+      setErrorMessage('Playlist already exist');
     }
 
     if (playlistId && !playlist[playlistId]) {
-      setErrorMessage('');
-      dispatch(fetchPlaylist(playlistId));
-      setOpenSnackbar(true);
-      setSuccessMessage('Playlist added');
-      setPlaylistId('');
-      handleClose();
+      const response = await dispatch(fetchPlaylist(playlistId));
+
+      if (response.meta.requestStatus === 'fulfilled') {
+        setErrorMessage('');
+        setSuccessMessage('Playlist successfully added');
+        setOpenSnackbar(true);
+        setPlaylistId('');
+        handleClose();
+      }
+      if (response.meta.requestStatus === 'rejected') {
+        setSuccessMessage('');
+        setErrorMessage(
+          'There was an error occurred, please make sure your playlist link or id is valid'
+        );
+        setOpenSnackbar(true);
+      }
     }
   };
 
@@ -78,7 +86,7 @@ const PlaylistForm = ({ open, handleClose }) => {
               label: {
                 fontFamily: 'Dank Mono Italic',
                 fontWeight: 700,
-                fontSize: 16
+                fontSize: 16,
               },
             }}
           />
@@ -89,7 +97,7 @@ const PlaylistForm = ({ open, handleClose }) => {
             onClick={handleClose}
             variant='contained'
             disableRipple
-            sx={{ marginRight: { xs:0, md: 2}}}
+            sx={{ marginRight: { xs: 0, md: 2 } }}
           >
             Cancel
           </Button>
@@ -105,7 +113,7 @@ const PlaylistForm = ({ open, handleClose }) => {
         </DialogActions>
       </Dialog>
 
-      {errorMessage && errorMessage?.length > 0 && (
+      {errorMessage && (
         <Snackbar
           open={openSnackbar}
           autoHideDuration={3000}
@@ -122,7 +130,7 @@ const PlaylistForm = ({ open, handleClose }) => {
         </Snackbar>
       )}
 
-      {successMessage && successMessage?.length > 0 && (
+      {successMessage && (
         <Snackbar
           open={openSnackbar}
           autoHideDuration={3000}
@@ -135,23 +143,6 @@ const PlaylistForm = ({ open, handleClose }) => {
             sx={{ width: '100%' }}
           >
             {successMessage}
-          </Alert>
-        </Snackbar>
-      )}
-
-      {responseError && responseError?.length > 0 && (
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={3000}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          onClose={snackbarCloseHandler}
-        >
-          <Alert
-            onClose={snackbarCloseHandler}
-            severity='error'
-            sx={{ width: '100%' }}
-          >
-            {responseError}
           </Alert>
         </Snackbar>
       )}

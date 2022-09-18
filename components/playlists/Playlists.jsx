@@ -1,6 +1,8 @@
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CardMedia,
@@ -17,7 +19,6 @@ const Playlists = () => {
     useSelector((state) => state.playlists) || {};
   const playlistArray = Object.values(playlist);
 
-  playlistArray.map((test) => console.log(test));
   return (
     <Box
       component='div'
@@ -41,14 +42,14 @@ const Playlists = () => {
             {playlistArray?.length} results
           </Typography>
         </Box>
-        <Divider />
+        <Divider sx={{ marginTop: 1 }} />
 
-        <Grid container spacing={4} sx={{ marginTop: 2 }}>
+        <Grid container spacing={2} sx={{ marginTop: { xs: 0, sm: 1 } }}>
           {playlistArray &&
             playlistArray?.length > 0 &&
             playlistArray?.map((plist) => (
               <Grid item key={plist.playlistId} xs={12} sm={6} md={4} lg={3}>
-                <Card className={styles.playlist__card} sx={{ maxWidth: 345 }}>
+                <Card className={styles.playlist__card}>
                   <CardMedia
                     component='img'
                     height='160'
@@ -65,40 +66,54 @@ const Playlists = () => {
                       {plist.playlistTitle.substring(0, 50)}
                     </Typography>
 
-                    <Box
-                      component='div'
-                      className={styles.cardContent__info}
-                      sx={{ marginY: 2 }}
-                    >
+                    <Box component='div'>
                       <Box
                         component='div'
-                        className={styles.cardContent__subInfo}
+                        className={styles.cardContent__info}
+                        sx={{ marginY: 2 }}
                       >
-                        <PersonIcon className={styles.subInfo__icon} />
+                        <Box
+                          component='div'
+                          className={styles.cardContent__subInfo}
+                        >
+                          <PersonIcon className={styles.subInfo__icon} />
+                          <Typography
+                            className={styles.subInfo__title}
+                            variant='body1'
+                          >
+                            {plist.channelTitle}
+                          </Typography>
+                        </Box>
+
                         <Typography
-                          className={styles.subInfo__title}
+                          className={styles.cardContent__ongoing}
                           variant='body1'
                         >
-                          {plist.channelTitle}
+                          Ongoing
                         </Typography>
                       </Box>
 
-                      <Typography
-                        className={styles.cardContent__ongoing}
-                        variant='body1'
-                      >
-                        Ongoing
+                      <Typography variant='body2'>
+                        {plist?.playlistDescription.substring(0, 80) ||
+                          ' Lorem ipsum dolor sit, amet consectetur adipisicing elit.' +
+                            '...'}
                       </Typography>
                     </Box>
+
+                    <Button
+                      className={styles.cardContent__btn}
+                      variant='contained'
+                      disableRipple
+                      fullWidth
+                    >
+                      Continue <ArrowRightAltIcon sx={{ marginLeft: 0.5 }} />
+                    </Button>
                   </CardContent>
                 </Card>
               </Grid>
             ))}
         </Grid>
       </Container>
-      {/* {playlistArray &&
-        playlistArray?.length > 0 &&
-        playlistArray?.map((plist) => <div key={plist.playlistId}>plist</div>)} */}
     </Box>
   );
 };

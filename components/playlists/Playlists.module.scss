@@ -46,5 +46,16 @@
         }
       }
     }
+
+    .cardContent__btn {
+      text-transform: capitalize !important;
+      background: #0ea5a0 !important;
+      margin-top: 15px !important;
+      box-shadow: none !important;
+
+      &:hover {
+        background: #0ea5a0e7 !important;
+      }
+    }
   }
 }

@@ -4,6 +4,7 @@ import getPlaylist from './playlistApi';
 const initialState = {
   playlist: {},
   isLoading: false,
+  isSuccess: false,
   isError: false,
   error: '',
 };
@@ -24,6 +25,7 @@ const playlistSlice = createSlice({
     builder
       .addCase(fetchPlaylist.pending, (state) => {
         state.isLoading = true;
+        state.isSuccess = false;
         state.isError = false;
         state.error = '';
       })
@@ -31,12 +33,13 @@ const playlistSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.error = '';
+        state.isSuccess = true;
         state.playlist = { ...state.playlist, ...action.payload };
       })
       .addCase(fetchPlaylist.rejected, (state, action) => {
         state.isLoading = false;
-        state.playlist = [];
         state.isError = true;
+        state.isSuccess = false;
         state.error = action?.error?.message;
       });
   },
