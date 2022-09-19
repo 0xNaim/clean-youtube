@@ -24,7 +24,7 @@ const getPlaylist = async (playlistId) => {
     description: playlistDescription,
     channelId,
     thumbnails,
-    channelTitle,
+    channelTitle: channelName,
   } = data?.items[0]?.snippet;
 
   playlistItems = playlistItems?.map((item) => {
@@ -49,7 +49,7 @@ const getPlaylist = async (playlistId) => {
       playlistDescription,
       playlistThumbnail: thumbnails.high,
       channelId,
-      channelTitle,
+      channelName,
       playlistItems,
     },
   };
