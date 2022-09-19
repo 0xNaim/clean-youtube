@@ -37,7 +37,7 @@ const VideoPlayer = () => {
   }, [videos]);
 
   return (
-    <Container maxWidth='xl' sx={{ paddingY: 5 }}>
+    <Container maxWidth='xl' sx={{ paddingY: 2 }}>
       <Grid container spacing={4}>
         <Grid item xs={12} sm={8}>
           left side
