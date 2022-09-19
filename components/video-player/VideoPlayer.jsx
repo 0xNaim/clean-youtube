@@ -1,3 +1,4 @@
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import {
   Box,
   Card,
@@ -8,8 +9,9 @@ import {
 } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import Player from '../player/Player';
 import styles from './VideoPlayer.module.scss';
 
 const VideoPlayer = () => {
@@ -25,24 +27,40 @@ const VideoPlayer = () => {
     singlePlaylist || {};
 
   const videos = playlistItems || [];
-  const [activeVideoId, setActiveVideoId] = useState('');
+  const [activeVideoId, setActiveVideoId] = useState(
+    videos[0]?.contentDetails?.videoId || ''
+  );
+  const [videoTitle, setVideoTitle] = useState(videos[0]?.title || '');
 
-  const indexAndVideoIdHandler = (index, videoId) => {
+  const handleState = (index, videoId, title) => {
     setActiveIndex(index);
     setActiveVideoId(videoId);
+    setVideoTitle(title);
   };
 
-  useEffect(() => {
-    setActiveVideoId(videos[0]?.contentDetails?.videoId);
-  }, [videos]);
+  // useEffect(() => {
+  //   setActiveVideoId(videos[0]?.contentDetails?.videoId);
+  // }, [videos]);
 
   return (
-    <Container maxWidth='xl' sx={{ paddingY: 2 }}>
+    <Container maxWidth='xl' sx={{ paddingY: 4 }}>
       <Grid container spacing={4}>
-        <Grid item xs={12} sm={8}>
-          left side
+        <Grid item xs={12} md={8} className={styles.leftSide}>
+          <Player videoId={activeVideoId} />
+          <Box component='div' className={styles.leftSide__description}>
+            <Link href={`https://www.youtube.com/playlist?list=${playlistId}`}>
+              <a className={styles.leftSide__link} target={'_blank'}>
+                <Typography className={styles.leftSide__link} variant='body2'>
+                  {playlistTitle}
+                </Typography>
+              </a>
+            </Link>
+            <Typography variant='h6' sx={{ fontWeight: 'normal' }}>
+              {videoTitle}
+            </Typography>
+          </Box>
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} md={4}>
           <Card>
             <CardContent className={styles.rightSide}>
               <Box component='div'>
@@ -90,12 +108,17 @@ const VideoPlayer = () => {
                             : `${styles.video}`
                         }
                         key={videoId}
-                        onClick={() =>
-                          indexAndVideoIdHandler(index + 1, videoId)
-                        }
-                        title={title}
+                        onClick={() => handleState(index + 1, videoId, title)}
                       >
-                        <Typography variant='body2'>{index + 1}</Typography>
+                        <Typography variant='body2'>
+                          {activeIndex === index + 1 ? (
+                            <PlayArrowIcon
+                              sx={{ fontSize: 16, color: '#6b6b6b' }}
+                            />
+                          ) : (
+                            index + 1
+                          )}
+                        </Typography>
                         <img
                           className={styles.video__thumbnail}
                           src={thumbnail.url}
