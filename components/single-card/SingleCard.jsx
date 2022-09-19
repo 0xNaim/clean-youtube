@@ -4,16 +4,19 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import {
+  Alert,
   Box,
   Button,
   Card,
   CardContent,
   CardMedia,
   IconButton,
+  Snackbar,
   Tooltip,
   Typography,
 } from '@mui/material';
 import Link from 'next/link';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deletePlaylist } from '../../redux/playlist/playlistSlice';
 import styles from './SingleCard.module.scss';
@@ -27,12 +30,18 @@ const SingleCard = ({
   playlistThumbnail,
 }) => {
   const dispatch = useDispatch();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const snackbarCloseHandler = () => setOpenSnackbar(false);
 
   const handleDelete = (id) => {
     const confirm = window.confirm('Are you sure to delete the playlist?');
-    
+
     if (confirm) {
-      dispatch(deletePlaylist(id));
+      setOpenSnackbar(true);
+      setTimeout(() => {
+        dispatch(deletePlaylist(id));
+      }, 1000);
     }
   };
 
@@ -114,6 +123,21 @@ const SingleCard = ({
           </a>
         </Link>
       </CardContent>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        onClose={snackbarCloseHandler}
+      >
+        <Alert
+          onClose={snackbarCloseHandler}
+          severity='error'
+          sx={{ width: '100%' }}
+        >
+          Playlist successfully deleted
+        </Alert>
+      </Snackbar>
     </Card>
   );
 };
