@@ -3,6 +3,7 @@
     position: relative !important;
 
     .playlist__cardThumbnail {
+      object-fit: cover !important;
       filter: blur(1px) brightness(70%) !important;
       -webkit-filter: blur(1px) brightness(70%) !important;
       -moz-filter: blur(1px) brightness(70%) !important;

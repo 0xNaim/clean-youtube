@@ -15,10 +15,8 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { deletePlaylist } from '../../redux/playlist/playlistSlice';
 import styles from './SingleCard.module.scss';
 
 const SingleCard = ({
@@ -28,32 +26,28 @@ const SingleCard = ({
   playlistTitle,
   playlistDescription,
   playlistThumbnail,
+  openSnackbar,
+  snackbarCloseHandler,
+  handleDelete,
 }) => {
-  const dispatch = useDispatch();
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-
-  const snackbarCloseHandler = () => setOpenSnackbar(false);
-
-  const handleDelete = (id) => {
-    const confirm = window.confirm('Are you sure to delete the playlist?');
-
-    if (confirm) {
-      setOpenSnackbar(true);
-      setTimeout(() => {
-        dispatch(deletePlaylist(id));
-      }, 1000);
-    }
-  };
-
   return (
     <Card className={styles.playlist__card}>
       <Box component='div' className={styles.playlist__cardMedia}>
-        <CardMedia
+        {/* <CardMedia
           className={styles.playlist__cardThumbnail}
           component='img'
           height='160'
           image={playlistThumbnail?.url}
           alt={playlistTitle}
+        /> */}
+
+        <Image
+          layout='responsive'
+          className={styles.playlist__cardThumbnail}
+          src={playlistThumbnail?.url}
+          alt={playlistTitle}
+          width={500}
+          height={300}
         />
 
         <PlayCircleFilledIcon className={styles.playlist__card__playIcon} />

@@ -1,11 +1,29 @@
 import { Box, Container, Divider, Grid, Typography } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { deletePlaylist } from '../../redux/playlist/playlistSlice';
 import SingleCard from '../single-card/SingleCard';
 import styles from './Playlists.module.scss';
 
 const Playlists = () => {
   const { playlist } = useSelector((state) => state.playlists) || {};
+  const dispatch = useDispatch();
+
   const playlistArray = Object.values(playlist);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const snackbarCloseHandler = () => setOpenSnackbar(false);
+
+  const handleDelete = (id) => {
+    const confirm = window.confirm('Are you sure to delete the playlist?');
+
+    if (confirm) {
+      setOpenSnackbar(true);
+      setTimeout(() => {
+        dispatch(deletePlaylist(id));
+      }, 1000);
+    }
+  };
 
   return (
     <Box
@@ -51,6 +69,9 @@ const Playlists = () => {
                   playlistTitle={plist.playlistTitle}
                   playlistThumbnail={plist.playlistThumbnail}
                   playlistDescription={plist.playlistDescription}
+                  openSnackbar={openSnackbar}
+                  snackbarCloseHandler={snackbarCloseHandler}
+                  handleDelete={handleDelete}
                 />
               </Grid>
             ))}
