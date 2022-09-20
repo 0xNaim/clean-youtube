@@ -91,7 +91,7 @@ const VideoPlayer = () => {
               <Typography variant='body2'>
                 {showMore
                   ? playlistDescription
-                  : playlistDescription.substring(0, 250)}
+                  : playlistDescription?.substring(0, 250)}
               </Typography>
               <Button
                 disableRipple

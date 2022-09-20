@@ -1,6 +1,6 @@
 import YouTube from 'react-youtube';
 
-const Player = ({ videoId = '',  }) => {
+const Player = ({ videoId }) => {
   const opts = {
     width: '100%',
     height: '480',
@@ -9,7 +9,7 @@ const Player = ({ videoId = '',  }) => {
       autoplay: 1,
     },
   };
-  return <YouTube videoId={videoId} opts={opts} loading={'Loading...'} />;
+  return <YouTube videoId={videoId} opts={opts} loading={'lazy'} />;
 };
 
 export default Player;

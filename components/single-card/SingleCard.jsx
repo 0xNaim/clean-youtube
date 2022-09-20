@@ -9,7 +9,6 @@ import {
   Button,
   Card,
   CardContent,
-  CardMedia,
   IconButton,
   Snackbar,
   Tooltip,
@@ -33,14 +32,6 @@ const SingleCard = ({
   return (
     <Card className={styles.playlist__card}>
       <Box component='div' className={styles.playlist__cardMedia}>
-        {/* <CardMedia
-          className={styles.playlist__cardThumbnail}
-          component='img'
-          height='160'
-          image={playlistThumbnail?.url}
-          alt={playlistTitle}
-        /> */}
-
         <Image
           layout='responsive'
           className={styles.playlist__cardThumbnail}
