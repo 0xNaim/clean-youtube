@@ -1,6 +1,8 @@
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import {
+  Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   Container,
@@ -17,14 +19,20 @@ import styles from './VideoPlayer.module.scss';
 const VideoPlayer = () => {
   const { playlist } = useSelector((state) => state.playlists || {});
   const [activeIndex, setActiveIndex] = useState(1);
+  const [showMore, setShowMore] = useState(false);
 
   const {
     query: { playlistId },
   } = useRouter();
 
   const singlePlaylist = playlist[playlistId];
-  const { playlistTitle, channelId, channelName, playlistItems } =
-    singlePlaylist || {};
+  const {
+    playlistTitle,
+    playlistDescription,
+    channelId,
+    channelName,
+    playlistItems,
+  } = singlePlaylist || {};
 
   const videos = playlistItems || [];
   const [activeVideoId, setActiveVideoId] = useState(
@@ -59,14 +67,57 @@ const VideoPlayer = () => {
               {videoTitle}
             </Typography>
           </Box>
+
+          <Box component='div' className={styles.channel__description}>
+            <Avatar>{channelName?.split(' ')[0]?.charAt(0)}</Avatar>
+
+            <Box component='div' className={styles.description}>
+              <Link href={`https://www.youtube.com/channel/${channelName}`}>
+                <a className={styles.link} target={'_blank'}>
+                  <Typography
+                    variant='h6'
+                    sx={{
+                      fontWeight: 'normal',
+                      fontSize: 16,
+                      display: 'inline-block',
+                    }}
+                    title={channelName}
+                  >
+                    {channelName}
+                  </Typography>
+                </a>
+              </Link>
+              <Typography variant='body2'>{playlistTitle}</Typography>
+              <Typography variant='body2'>
+                {showMore
+                  ? playlistDescription
+                  : playlistDescription.substring(0, 250)}
+              </Typography>
+              <Button
+                disableRipple
+                className={styles.description__showMore}
+                onClick={() => setShowMore(!showMore)}
+              >
+                {showMore ? 'Show Less' : 'Show More'}
+              </Button>
+            </Box>
+          </Box>
         </Grid>
         <Grid item xs={12} md={4}>
           <Card>
             <CardContent className={styles.rightSide}>
               <Box component='div'>
-                <Typography variant='body2' sx={{ fontWeight: 500 }}>
-                  {playlistTitle?.substring(0, 55) + '...'}
-                </Typography>
+                <Link href={`https://www.youtube.com/playlist?list=${playlistId}`}>
+                  <a target='_blank' className={styles.link}>
+                    <Typography
+                      title={playlistTitle}
+                      variant='body2'
+                      sx={{ fontWeight: 500 }}
+                    >
+                      {playlistTitle?.substring(0, 55) + '...'}
+                    </Typography>
+                  </a>
+                </Link>
 
                 <Box component='div' className={styles.rightSide__subHeading}>
                   <Link href={`https://www.youtube.com/channel/${channelId}`}>
@@ -109,6 +160,7 @@ const VideoPlayer = () => {
                         }
                         key={videoId}
                         onClick={() => handleState(index + 1, videoId, title)}
+                        title={title}
                       >
                         <Typography variant='body2'>
                           {activeIndex === index + 1 ? (
