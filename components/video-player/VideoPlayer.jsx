@@ -46,10 +46,6 @@ const VideoPlayer = () => {
     setVideoTitle(title);
   };
 
-  // useEffect(() => {
-  //   setActiveVideoId(videos[0]?.contentDetails?.videoId);
-  // }, [videos]);
-
   return (
     <Container maxWidth='xl' sx={{ paddingY: 4 }}>
       <Grid container spacing={4}>
@@ -107,7 +103,9 @@ const VideoPlayer = () => {
           <Card>
             <CardContent className={styles.rightSide}>
               <Box component='div'>
-                <Link href={`https://www.youtube.com/playlist?list=${playlistId}`}>
+                <Link
+                  href={`https://www.youtube.com/playlist?list=${playlistId}`}
+                >
                   <a target='_blank' className={styles.link}>
                     <Typography
                       title={playlistTitle}
