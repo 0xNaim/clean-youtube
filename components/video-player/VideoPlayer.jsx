@@ -39,8 +39,6 @@ const VideoPlayer = () => {
     singlePlaylist || {};
   const videosArray = Object.values(videos);
 
-  console.log(playlistId);
-
   const handleState = (index, videoId, title) => {
     setVideoActiveIndex(index);
     setActiveVideoId(videoId);
