@@ -30,6 +30,8 @@ const videosSlice = createSlice({
         state.isSuccess = false;
         state.isError = false;
         state.error = '';
+        state.activeVideoId = '';
+        state.activeVideoTitle = '';
       })
       .addCase(fetchVideos.fulfilled, (state, action) => {
         state.isLoading = false;
