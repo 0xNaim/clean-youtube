@@ -29,8 +29,6 @@ const VideoPlayer = () => {
   } = useSelector((state) => state.videos || {});
   const dispatch = useDispatch();
 
-  
-
   const [activeVideoIndex, setVideoActiveIndex] = useState(1);
   const [activeVideoId, setActiveVideoId] = useState(initialVideoId);
   const [activeVideoTitle, setActiveVideoTitle] = useState(initialVideoTitle);
@@ -41,23 +39,22 @@ const VideoPlayer = () => {
     singlePlaylist || {};
   const videosArray = Object.values(videos);
 
-  
-
   const handleState = (index, videoId, title) => {
     setVideoActiveIndex(index);
     setActiveVideoId(videoId);
     setActiveVideoTitle(title);
   };
 
-  console.log('videos', initialVideoTitle);
-
   useEffect(() => {
     dispatch(fetchVideos(playlistId));
-    
   }, [dispatch, playlistId]);
 
   return (
-    <Container maxWidth='xl' sx={{ paddingY: 4 }} className={styles.video__player}>
+    <Container
+      maxWidth='xl'
+      sx={{ paddingY: 4 }}
+      className={styles.video__player}
+    >
       <Grid container spacing={4}>
         <Grid item xs={12} md={8} className={styles.leftSide}>
           <Player videoId={activeVideoId} />

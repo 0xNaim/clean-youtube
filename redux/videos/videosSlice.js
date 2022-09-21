@@ -30,8 +30,6 @@ const videosSlice = createSlice({
         state.isSuccess = false;
         state.isError = false;
         state.error = '';
-        state.activeVideoId = '';
-        state.activeVideoTitle = '';
       })
       .addCase(fetchVideos.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -49,8 +47,6 @@ const videosSlice = createSlice({
         state.isSuccess = false;
         state.isError = true;
         state.error = action?.error?.message;
-        state.activeVideoId = '';
-        state.activeVideoTitle = '';
       });
   },
 });
