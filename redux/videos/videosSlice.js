@@ -7,6 +7,8 @@ const initialState = {
   isSuccess: false,
   isError: false,
   error: '',
+  activeVideoId: '',
+  activeVideoTitle: '',
 };
 
 // Async thunk
@@ -21,17 +23,6 @@ export const fetchVideos = createAsyncThunk(
 const videosSlice = createSlice({
   name: 'videos',
   initialState,
-  reducers: {
-    setActiveVideoId: (state, action) => {
-      state.activeVideoId = action.payload;
-    },
-    setActiveVideoIndex: (state, action) => {
-      state.activeVideoIndex = action.payload;
-    },
-    setActiveVideoTitle: (state, action) => {
-      state.activeVideoTitle = action.payload;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchVideos.pending, (state) => {
@@ -46,16 +37,20 @@ const videosSlice = createSlice({
         state.isError = false;
         state.error = '';
         state.videos = action.payload;
+        state.activeVideoId = Object.values(
+          action.payload
+        )[0].contentDetails?.videoId;
+        state.activeVideoTitle = Object.values(action.payload)[0]?.title;
       })
       .addCase(fetchVideos.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.error = action?.error?.message;
+        state.activeVideoId = '';
+        state.activeVideoTitle = '';
       });
   },
 });
 
-export const { setActiveVideoId, setActiveVideoIndex, setActiveVideoTitle } =
-  videosSlice.actions;
 export default videosSlice.reducer;

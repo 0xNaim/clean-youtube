@@ -1,15 +1,21 @@
-import YouTube from 'react-youtube';
+import ReactPlayer from 'react-player/youtube';
+import styles from './Player.module.scss';
 
 const Player = ({ videoId }) => {
-  const opts = {
-    width: '100%',
-    height: '480',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
+  const config = {
+    youtube: {
+      playerVars: { showinfo: 1 },
     },
   };
-  return <YouTube videoId={videoId} opts={opts} loading={'lazy'} />;
+
+  return (
+    <ReactPlayer
+      className={styles.player}
+      url={`https://www.youtube.com/watch?v=${videoId}`}
+      config={config}
+      controls
+    />
+  );
 };
 
 export default Player;

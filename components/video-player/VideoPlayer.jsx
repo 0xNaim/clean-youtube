@@ -22,22 +22,24 @@ const VideoPlayer = () => {
     query: { playlistId },
   } = useRouter();
   const { playlists } = useSelector((state) => state.playlists || {});
-  const { videos } = useSelector((state) => state.videos || {});
+  const {
+    videos,
+    activeVideoId: initialVideoId,
+    activeVideoTitle: initialVideoTitle,
+  } = useSelector((state) => state.videos || {});
   const dispatch = useDispatch();
 
-  const videosArray = Object.values(videos);
   const [activeVideoIndex, setVideoActiveIndex] = useState(1);
-  const [activeVideoId, setActiveVideoId] = useState(
-    videos[0]?.contentDetails?.videoId || ''
-  );
-  const [activeVideoTitle, setActiveVideoTitle] = useState(
-    videosArray[0]?.title || ''
-  );
+  const [activeVideoId, setActiveVideoId] = useState(initialVideoId);
+  const [activeVideoTitle, setActiveVideoTitle] = useState(initialVideoTitle);
   const [showMore, setShowMore] = useState(false);
 
   const singlePlaylist = playlists[playlistId];
   const { playlistTitle, playlistDescription, channelId, channelName } =
     singlePlaylist || {};
+  const videosArray = Object.values(videos);
+
+  console.log(playlistId);
 
   const handleState = (index, videoId, title) => {
     setVideoActiveIndex(index);
@@ -50,7 +52,7 @@ const VideoPlayer = () => {
   }, [dispatch, playlistId]);
 
   return (
-    <Container maxWidth='xl' sx={{ paddingY: 4 }}>
+    <Container maxWidth='xl' sx={{ paddingY: 4 }} className={styles.video__player}>
       <Grid container spacing={4}>
         <Grid item xs={12} md={8} className={styles.leftSide}>
           <Player videoId={activeVideoId} />

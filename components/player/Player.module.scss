@@ -1,4 +1,10 @@
 .player {
-  width: 800px !important;
-  height: 800px !important;
+  width: 100% !important;
+  height: 77vh !important;
+}
+
+@media only screen and (max-width: 900px) {
+  .player {
+    height: 65vh !important;
+  }
 }
