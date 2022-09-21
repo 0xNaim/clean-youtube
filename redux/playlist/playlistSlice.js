@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import getPlaylist from './playlistApi';
 
 const initialState = {
-  playlist: {},
+  playlists: {},
   isLoading: false,
   isSuccess: false,
   isError: false,
@@ -23,32 +23,29 @@ const playlistSlice = createSlice({
   initialState,
   reducers: {
     deletePlaylist: (state, action) => {
-      delete state.playlist[action.payload]
-    }
+      delete state.playlists[action.payload];
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPlaylist.pending, (state) => {
         state.isLoading = true;
-        state.isSuccess = false;
-        state.isError = false;
-        state.error = '';
       })
       .addCase(fetchPlaylist.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isSuccess = true;
         state.isError = false;
         state.error = '';
-        state.isSuccess = true;
-        state.playlist = { ...state.playlist, ...action.payload };
+        state.playlists = { ...state.playlists, ...action.payload };
       })
       .addCase(fetchPlaylist.rejected, (state, action) => {
         state.isLoading = false;
-        state.isError = true;
         state.isSuccess = false;
+        state.isError = true;
         state.error = action?.error?.message;
       });
   },
 });
 
-export const {deletePlaylist} = playlistSlice.actions
+export const { deletePlaylist } = playlistSlice.actions;
 export default playlistSlice.reducer;

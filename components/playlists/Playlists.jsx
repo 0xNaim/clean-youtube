@@ -6,10 +6,10 @@ import SingleCard from '../single-card/SingleCard';
 import styles from './Playlists.module.scss';
 
 const Playlists = () => {
-  const { playlist } = useSelector((state) => state.playlists) || {};
+  const { playlists } = useSelector((state) => state.playlists) || {};
   const dispatch = useDispatch();
 
-  const playlistArray = Object.values(playlist);
+  const playlistsArray = Object.values(playlists);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const snackbarCloseHandler = () => setOpenSnackbar(false);
@@ -41,40 +41,38 @@ const Playlists = () => {
             Ongoing Playlists
           </Typography>
 
-          {playlistArray?.length > 0 && (
+          {playlistsArray?.length > 0 && (
             <Typography
               className={styles.playlist__totalResult}
               variant='h6'
               sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
             >
-              {playlistArray?.length} results
+              {playlistsArray?.length} results
             </Typography>
           )}
         </Box>
         <Divider sx={{ marginTop: 1 }} />
 
-        {playlistArray?.length === 0 && (
+        {playlistsArray?.length === 0 && (
           <Typography variant='body1'>There are no playlist found</Typography>
         )}
 
         <Grid container spacing={2} sx={{ marginTop: { xs: 0, sm: 1 } }}>
-          {playlistArray &&
-            playlistArray?.length > 0 &&
-            playlistArray?.map((plist) => (
-              <Grid item key={plist.playlistId} xs={12} sm={6} md={4} lg={3}>
-                <SingleCard
-                  channelId={plist.channelId}
-                  channelName={plist.channelName}
-                  playlistId={plist.playlistId}
-                  playlistTitle={plist.playlistTitle}
-                  playlistThumbnail={plist.playlistThumbnail}
-                  playlistDescription={plist.playlistDescription}
-                  openSnackbar={openSnackbar}
-                  snackbarCloseHandler={snackbarCloseHandler}
-                  handleDelete={handleDelete}
-                />
-              </Grid>
-            ))}
+          {playlistsArray?.map((plist) => (
+            <Grid item key={plist.playlistId} xs={12} sm={6} md={4} lg={3}>
+              <SingleCard
+                channelId={plist.channelId}
+                channelName={plist.channelName}
+                playlistId={plist.playlistId}
+                playlistTitle={plist.playlistTitle}
+                playlistThumbnail={plist.playlistThumbnail}
+                playlistDescription={plist.playlistDescription}
+                openSnackbar={openSnackbar}
+                snackbarCloseHandler={snackbarCloseHandler}
+                handleDelete={handleDelete}
+              />
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </Box>

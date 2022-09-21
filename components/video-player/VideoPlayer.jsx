@@ -11,40 +11,43 @@ import {
 } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchVideos } from '../../redux/videos/videosSlice';
 import Player from '../player/Player';
 import styles from './VideoPlayer.module.scss';
 
 const VideoPlayer = () => {
-  const { playlist } = useSelector((state) => state.playlists || {});
-  const [activeIndex, setActiveIndex] = useState(1);
-  const [showMore, setShowMore] = useState(false);
-
   const {
     query: { playlistId },
   } = useRouter();
+  const { playlists } = useSelector((state) => state.playlists || {});
+  const { videos } = useSelector((state) => state.videos || {});
+  const dispatch = useDispatch();
 
-  const singlePlaylist = playlist[playlistId];
-  const {
-    playlistTitle,
-    playlistDescription,
-    channelId,
-    channelName,
-    playlistItems,
-  } = singlePlaylist || {};
-
-  const videos = playlistItems || [];
+  const videosArray = Object.values(videos);
+  const [activeVideoIndex, setVideoActiveIndex] = useState(1);
   const [activeVideoId, setActiveVideoId] = useState(
     videos[0]?.contentDetails?.videoId || ''
   );
-  const [videoTitle, setVideoTitle] = useState(videos[0]?.title || '');
+  const [activeVideoTitle, setActiveVideoTitle] = useState(
+    videosArray[0]?.title || ''
+  );
+  const [showMore, setShowMore] = useState(false);
+
+  const singlePlaylist = playlists[playlistId];
+  const { playlistTitle, playlistDescription, channelId, channelName } =
+    singlePlaylist || {};
 
   const handleState = (index, videoId, title) => {
-    setActiveIndex(index);
+    setVideoActiveIndex(index);
     setActiveVideoId(videoId);
-    setVideoTitle(title);
+    setActiveVideoTitle(title);
   };
+
+  useEffect(() => {
+    dispatch(fetchVideos(playlistId));
+  }, [dispatch, playlistId]);
 
   return (
     <Container maxWidth='xl' sx={{ paddingY: 4 }}>
@@ -60,7 +63,7 @@ const VideoPlayer = () => {
               </a>
             </Link>
             <Typography variant='h6' sx={{ fontWeight: 'normal' }}>
-              {videoTitle}
+              {activeVideoTitle}
             </Typography>
           </Box>
 
@@ -135,61 +138,59 @@ const VideoPlayer = () => {
                   <Typography
                     className={styles.subHeading__totalVideos}
                     variant='body2'
-                  >{`- ${activeIndex} / ${videos?.length}`}</Typography>
+                  >{`- ${activeVideoIndex} / ${videosArray?.length}`}</Typography>
                 </Box>
               </Box>
 
               <Box component='div' className={styles.video__wrapper}>
-                {videos &&
-                  videos?.length > 0 &&
-                  videos.map((video, index) => {
-                    const {
-                      contentDetails: { videoId },
-                      title,
-                      thumbnail,
-                    } = video || {};
+                {videosArray?.map((video, index) => {
+                  const {
+                    contentDetails: { videoId },
+                    title,
+                    thumbnail,
+                  } = video || {};
 
-                    return (
-                      <Box
-                        className={
-                          activeIndex === index + 1
-                            ? `${styles.video} ${styles.active}`
-                            : `${styles.video}`
-                        }
-                        key={videoId}
-                        onClick={() => handleState(index + 1, videoId, title)}
-                        title={title}
-                      >
-                        <Typography variant='body2'>
-                          {activeIndex === index + 1 ? (
-                            <PlayArrowIcon
-                              sx={{ fontSize: 16, color: '#6b6b6b' }}
-                            />
-                          ) : (
-                            index + 1
-                          )}
+                  return (
+                    <Box
+                      className={
+                        activeVideoIndex === index + 1
+                          ? `${styles.video} ${styles.active}`
+                          : `${styles.video}`
+                      }
+                      key={videoId}
+                      onClick={() => handleState(index + 1, videoId, title)}
+                      title={title}
+                    >
+                      <Typography variant='body2'>
+                        {activeVideoIndex === index + 1 ? (
+                          <PlayArrowIcon
+                            sx={{ fontSize: 16, color: '#6b6b6b' }}
+                          />
+                        ) : (
+                          index + 1
+                        )}
+                      </Typography>
+                      <img
+                        className={styles.video__thumbnail}
+                        src={thumbnail.url}
+                        alt={title}
+                      />
+
+                      <Box component={'div'}>
+                        <Typography variant='body2' sx={{ fontWeight: 500 }}>
+                          {title.substring(0, 50)}
                         </Typography>
-                        <img
-                          className={styles.video__thumbnail}
-                          src={thumbnail.url}
-                          alt={title}
-                        />
-
-                        <Box component={'div'}>
-                          <Typography variant='body2' sx={{ fontWeight: 500 }}>
-                            {title.substring(0, 50)}
-                          </Typography>
-                          <Typography
-                            className={styles.video__channelName}
-                            variant='body2'
-                            sx={{ fontWeight: 500 }}
-                          >
-                            {channelName}
-                          </Typography>
-                        </Box>
+                        <Typography
+                          className={styles.video__channelName}
+                          variant='body2'
+                          sx={{ fontWeight: 500 }}
+                        >
+                          {channelName}
+                        </Typography>
                       </Box>
-                    );
-                  })}
+                    </Box>
+                  );
+                })}
               </Box>
             </CardContent>
           </Card>

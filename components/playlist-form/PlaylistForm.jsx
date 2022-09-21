@@ -21,7 +21,7 @@ const PlaylistForm = ({ open, handleClose }) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const dispatch = useDispatch();
-  const { playlist } = useSelector((state) => state.playlists);
+  const { playlists } = useSelector((state) => state.playlists);
 
   if (playlistId.includes('youtube.com/watch?')) {
     const match = /[&|\?]list=([a-zA-Z0-9_-]+)/gi.exec(playlistId);
@@ -31,13 +31,13 @@ const PlaylistForm = ({ open, handleClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (playlist[playlistId]) {
+    if (playlists[playlistId]) {
       setSuccessMessage('');
       setOpenSnackbar(true);
       setErrorMessage('Playlist already exist');
     }
 
-    if (playlistId && !playlist[playlistId]) {
+    if (playlistId && !playlists[playlistId]) {
       const response = await dispatch(fetchPlaylist(playlistId));
 
       if (response.meta.requestStatus === 'fulfilled') {
