@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Favorites from '../components/favorites/Favorites';
 import Layout from '../components/layout';
 import Playlists from '../components/playlists/Playlists';
 
@@ -10,6 +11,7 @@ const Home = () => {
       </Head>
       <Layout>
         <Playlists />
+        <Favorites />
       </Layout>
     </>
   );
