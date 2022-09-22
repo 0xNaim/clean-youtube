@@ -33,7 +33,6 @@ const SingleCard = ({
   handleDelete,
 }) => {
   const { favorites } = useSelector((state) => state.favorites);
-  const { playlists } = useSelector((state) => state.playlists);
   const dispatch = useDispatch();
 
   const [favoriteMessage, setFavoriteMessage] = useState('');
