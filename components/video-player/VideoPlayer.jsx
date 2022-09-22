@@ -12,8 +12,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchVideos } from '../../redux/videos/videosSlice';
+import { useSelector } from 'react-redux';
 import Player from '../player/Player';
 import styles from './VideoPlayer.module.scss';
 
@@ -22,22 +21,17 @@ const VideoPlayer = () => {
     query: { playlistId },
   } = useRouter();
   const { playlists } = useSelector((state) => state.playlists || {});
-  const {
-    videos,
-    activeVideoId: initialVideoId,
-    activeVideoTitle: initialVideoTitle,
-  } = useSelector((state) => state.videos || {});
-  const dispatch = useDispatch();
 
   const [activeVideoIndex, setVideoActiveIndex] = useState(1);
-  const [activeVideoId, setActiveVideoId] = useState(initialVideoId);
-  const [activeVideoTitle, setActiveVideoTitle] = useState(initialVideoTitle);
   const [showMore, setShowMore] = useState(false);
 
   const singlePlaylist = playlists[playlistId];
   const { playlistTitle, playlistDescription, channelId, channelName } =
     singlePlaylist || {};
-  const videosArray = Object.values(videos);
+
+  const { playlistItems: videosArray } = singlePlaylist || {};
+  const [activeVideoId, setActiveVideoId] = useState('');
+  const [activeVideoTitle, setActiveVideoTitle] = useState('');
 
   const handleState = (index, videoId, title) => {
     setVideoActiveIndex(index);
@@ -46,8 +40,9 @@ const VideoPlayer = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchVideos(playlistId));
-  }, [dispatch, playlistId]);
+    setActiveVideoId(videosArray && videosArray[0]?.contentDetails?.videoId);
+    setActiveVideoTitle(videosArray && videosArray[0]?.title);
+  }, [videosArray]);
 
   return (
     <Container
