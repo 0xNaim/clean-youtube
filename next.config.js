@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const config = {
+const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   env: { NEXT_PUBLIC_YOUTUBE_API_KEY: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY },
@@ -9,4 +9,4 @@ const config = {
   },
 };
 
-module.exports = config;
+module.exports = nextConfig;
