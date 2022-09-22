@@ -8,6 +8,7 @@ const Home = () => {
     <>
       <Head>
         <title>Clean YouTube</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
       </Head>
       <Layout>
         <Playlists />
