@@ -30,30 +30,38 @@ const PlaylistForm = ({ open, handleClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSuccessMessage('');
+    setErrorMessage('');
 
     if (playlists[playlistId]) {
       setSuccessMessage('');
-      setOpenSnackbar(true);
       setErrorMessage('Playlist already exist');
+      setOpenSnackbar(true);
     }
 
-    if (playlistId && !playlists[playlistId]) {
-      const response = await dispatch(fetchPlaylist(playlistId));
+    if (Object.values(playlists)?.length < 5) {
+      if (playlistId && !playlists[playlistId]) {
+        const response = await dispatch(fetchPlaylist(playlistId));
 
-      if (response.meta.requestStatus === 'fulfilled') {
-        setErrorMessage('');
-        setSuccessMessage('Playlist successfully added');
-        setOpenSnackbar(true);
-        setPlaylistId('');
-        handleClose();
+        if (response.meta.requestStatus === 'fulfilled') {
+          setErrorMessage('');
+          setSuccessMessage('Playlist successfully added');
+          setOpenSnackbar(true);
+          setPlaylistId('');
+          handleClose();
+        }
+        if (response.meta.requestStatus === 'rejected') {
+          setSuccessMessage('');
+          setErrorMessage(
+            'There was an error occurred, please make sure your playlist link or id is valid'
+          );
+          setOpenSnackbar(true);
+        }
       }
-      if (response.meta.requestStatus === 'rejected') {
-        setSuccessMessage('');
-        setErrorMessage(
-          'There was an error occurred, please make sure your playlist link or id is valid'
-        );
-        setOpenSnackbar(true);
-      }
+    } else {
+      setSuccessMessage('');
+      setErrorMessage("You can't add more than five playlist");
+      setOpenSnackbar(true);
     }
   };
 
