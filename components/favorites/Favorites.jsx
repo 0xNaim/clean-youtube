@@ -21,7 +21,7 @@ const Favorites = () => {
         dispatch(deletePlaylistFromFavorite(playlistId));
       }, 1000);
     }
-  };
+  };dfdsfd
 
   const snackbarCloseHandler = () => setOpenSnackbar(false);
 
