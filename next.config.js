@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
-const withPWA = require('next-pwa');
-
-module.exports = withPWA({
+const config = {
   reactStrictMode: true,
   swcMinify: true,
   env: { NEXT_PUBLIC_YOUTUBE_API_KEY: process.env.NEXT_PUBLIC_YOUTUBE_API_KEY },
@@ -9,9 +7,6 @@ module.exports = withPWA({
     domains: ['i.ytimg.com'],
     formats: ['image/avif', 'image/webp'],
   },
-  pwa: {
-    dest: 'public',
-    register: true,
-    skipWaiting: true,
-  },
-});
+};
+
+module.exports = config;
