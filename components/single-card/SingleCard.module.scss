@@ -4,9 +4,9 @@
 
     .playlist__cardThumbnail {
       object-fit: cover !important;
-      filter: blur(1px) brightness(70%) !important;
-      -webkit-filter: blur(1px) brightness(70%) !important;
-      -moz-filter: blur(1px) brightness(70%) !important;
+      filter: blur(1px) brightness(80%) !important;
+      -webkit-filter: blur(1px) brightness(80%) !important;
+      -moz-filter: blur(1px) brightness(80%) !important;
     }
 
     .playlist__card__playIcon {
@@ -14,7 +14,7 @@
       top: 50% !important;
       left: 50% !important;
       transform: translate(-50%, -50%) !important;
-      color: #ffffffdf !important;
+      color: #ffffffc9 !important;
       font-size: 4rem !important;
     }
 
