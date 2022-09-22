@@ -13,6 +13,7 @@ const Player = ({ videoId }) => {
       className={styles.player}
       url={`https://www.youtube.com/watch?v=${videoId}`}
       config={config}
+      playing
       controls
     />
   );
