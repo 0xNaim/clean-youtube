@@ -1,0 +1,43 @@
+.navbar {
+  background-color: #0ea5a0 !important;
+
+  &__menuIcon {
+    color: #fff !important;
+    font-size: 1.8rem !important;
+  }
+
+  &__link {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  &__brand {
+    font-weight: 700 !important;
+    font-family: 'Dank Mono' !important;
+  }
+
+  &__subheading {
+    font-family: 'Dank Mono Italic' !important;
+    font-weight: 700 !important;
+  }
+
+  &__icon {
+    color: #fff !important;
+    font-size: 1.8rem !important;
+  }
+
+  &__btn {
+    background-color: #fff !important;
+    color: #0ea5a0 !important;
+    text-transform: capitalize !important;
+    font-family: 'Dank Mono' !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    padding: 0.2rem 1.2rem !important;
+    box-shadow: none !important;
+  }
+}
+
+.drawer {
+  background: #0ea5a0 !important;
+}
