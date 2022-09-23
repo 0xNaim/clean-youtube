@@ -1,17 +1,16 @@
 import {
-  Alert,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Snackbar,
   TextField,
 } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPlaylist } from '../../redux/playlist/playlistSlice';
+import Notify from '../../utils/Notify';
 import styles from './PlaylistForm.module.scss';
 
 const PlaylistForm = ({ open, handleClose }) => {
@@ -122,37 +121,20 @@ const PlaylistForm = ({ open, handleClose }) => {
       </Dialog>
 
       {errorMessage && (
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={3000}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          onClose={snackbarCloseHandler}
-        >
-          <Alert
-            onClose={snackbarCloseHandler}
-            severity='error'
-            sx={{ width: '100%' }}
-          >
-            {errorMessage}
-          </Alert>
-        </Snackbar>
+        <Notify
+          openSnackbar={openSnackbar}
+          closeSnackbar={snackbarCloseHandler}
+          message={errorMessage}
+        />
       )}
 
       {successMessage && (
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={3000}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          onClose={snackbarCloseHandler}
-        >
-          <Alert
-            onClose={snackbarCloseHandler}
-            severity='success'
-            sx={{ width: '100%' }}
-          >
-            {successMessage}
-          </Alert>
-        </Snackbar>
+        <Notify
+          openSnackbar={openSnackbar}
+          closeSnackbar={snackbarCloseHandler}
+          message={successMessage}
+          success
+        />
       )}
     </>
   );

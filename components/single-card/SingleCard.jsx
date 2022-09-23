@@ -4,21 +4,16 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import {
-  Alert,
   Box,
   Button,
   Card,
   CardContent,
   IconButton,
-  Snackbar,
   Tooltip,
   Typography,
 } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchFavoritePlaylist } from '../../redux/favorite/favoriteSlice';
 import styles from './SingleCard.module.scss';
 
 const SingleCard = ({
@@ -28,29 +23,10 @@ const SingleCard = ({
   playlistTitle,
   playlistDescription,
   playlistThumbnail,
-  openSnackbar,
-  snackbarCloseHandler,
+  addToFavoriteHandler,
   handleDelete,
+  showFavorite = false,
 }) => {
-  const { favorites } = useSelector((state) => state.favorites);
-  const dispatch = useDispatch();
-
-  const [favoriteMessage, setFavoriteMessage] = useState('');
-  const [openFavoriteSnackbar, setOpenFavoriteSnackbar] = useState(false);
-
-  const favoriteSnackbarCloseHandler = () => setOpenFavoriteSnackbar(false);
-
-  const addToFavoriteHandler = async (playlistId) => {
-    if (playlistId && !favorites[playlistId]) {
-      const response = await dispatch(fetchFavoritePlaylist(playlistId));
-
-      if (response.meta.requestStatus === 'fulfilled') {
-        setFavoriteMessage('Playlist successfully added in favorite list');
-        setOpenFavoriteSnackbar(true);
-      }
-    }
-  };
-
   return (
     <Card className={styles.playlist__card}>
       <Box component='div' className={styles.playlist__cardMedia}>
@@ -66,14 +42,17 @@ const SingleCard = ({
         <PlayCircleFilledIcon className={styles.playlist__card__playIcon} />
 
         <Box component='div' className={styles.card__iconsWrapper}>
-          <Tooltip title='Favorite'>
-            <IconButton
-              onClick={() => addToFavoriteHandler(playlistId)}
-              sx={{ marginRight: 1 }}
-            >
-              <FavoriteIcon sx={{ color: '#ffffffdf' }} />
-            </IconButton>
-          </Tooltip>
+          {showFavorite && (
+            <Tooltip title='Favorite'>
+              <IconButton
+                onClick={() => addToFavoriteHandler(playlistId)}
+                sx={{ marginRight: 1 }}
+              >
+                <FavoriteIcon sx={{ color: '#ffffffdf' }} />
+              </IconButton>
+            </Tooltip>
+          )}
+
           <Tooltip title='Delete'>
             <IconButton onClick={() => handleDelete(playlistId)}>
               <DeleteForeverIcon sx={{ color: '#ffffffdf' }} />
@@ -133,36 +112,6 @@ const SingleCard = ({
           </a>
         </Link>
       </CardContent>
-
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={3000}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        onClose={snackbarCloseHandler}
-      >
-        <Alert
-          onClose={snackbarCloseHandler}
-          severity='error'
-          sx={{ width: '100%' }}
-        >
-          Playlist successfully deleted
-        </Alert>
-      </Snackbar>
-
-      <Snackbar
-        open={openFavoriteSnackbar}
-        autoHideDuration={3000}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        onClose={favoriteSnackbarCloseHandler}
-      >
-        <Alert
-          onClose={favoriteSnackbarCloseHandler}
-          severity='success'
-          sx={{ width: '100%' }}
-        >
-          {favoriteMessage}
-        </Alert>
-      </Snackbar>
     </Card>
   );
 };
