@@ -2,6 +2,7 @@ import { Box, Container, Divider, Grid, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePlaylistFromFavorite } from '../../redux/favorite/favoriteSlice';
+import Notify from '../../utils/Notify';
 import SingleCard from '../single-card/SingleCard';
 import styles from './Favorites.module.scss';
 
@@ -10,12 +11,14 @@ const Favorites = () => {
   const dispatch = useDispatch();
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [deleteMessage, setDeleteMessage] = useState('');
   const favoritesArray = Object.values(favorites);
 
   const handleDelete = (playlistId) => {
     const confirm = window.confirm('Are you sure to delete the playlist?');
 
     if (confirm) {
+      setDeleteMessage('Playlist deleted successfully');
       setOpenSnackbar(true);
       setTimeout(() => {
         dispatch(deletePlaylistFromFavorite(playlistId));
@@ -61,8 +64,6 @@ const Favorites = () => {
                     playlistTitle={plist.playlistTitle}
                     playlistThumbnail={plist.playlistThumbnail}
                     playlistDescription={plist.playlistDescription}
-                    openSnackbar={openSnackbar}
-                    snackbarCloseHandler={snackbarCloseHandler}
                     handleDelete={handleDelete}
                   />
                 </Grid>
@@ -70,6 +71,14 @@ const Favorites = () => {
             </Grid>
           </Container>
         </Box>
+      )}
+
+      {deleteMessage && (
+        <Notify
+          openSnackbar={openSnackbar}
+          closeSnackbar={snackbarCloseHandler}
+          message={deleteMessage}
+        />
       )}
     </>
   );
