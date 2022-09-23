@@ -73,7 +73,7 @@ const Favorites = () => {
         </Box>
       )}
 
-      {deleteMessage?.length && (
+      {deleteMessage && (
         <Notify
           openSnackbar={openSnackbar}
           closeSnackbar={snackbarCloseHandler}

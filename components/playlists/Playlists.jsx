@@ -97,7 +97,7 @@ const Playlists = () => {
         </Container>
       </Box>
 
-      {addMessage?.length && (
+      {addMessage && (
         <Notify
           openSnackbar={openSnackbar}
           closeSnackbar={snackbarCloseHandler}
@@ -106,7 +106,7 @@ const Playlists = () => {
         />
       )}
 
-      {deleteMessage?.length && (
+      {deleteMessage && (
         <Notify
           openSnackbar={openSnackbar}
           closeSnackbar={snackbarCloseHandler}
