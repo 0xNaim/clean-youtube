@@ -68,7 +68,7 @@ const SingleCard = ({
           variant='h6'
           sx={{ fontSize: 18 }}
         >
-          {playlistTitle?.substring(0, 50)}
+          {playlistTitle?.substring(0, 30)}
         </Typography>
 
         <Box component='div'>

@@ -1,5 +1,6 @@
-import { Box, Container, Divider, Grid, Typography } from '@mui/material';
+import { Box, Container, Divider, Typography } from '@mui/material';
 import { useState } from 'react';
+import Carousel from 'react-multi-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePlaylistFromRecent } from '../../redux/recent/recentSlice';
 import Notify from '../../utils/Notify';
@@ -28,6 +29,26 @@ const Recents = () => {
 
   const snackbarCloseHandler = () => setOpenSnackbar(false);
 
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 4,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+
   return (
     <>
       <Box
@@ -51,11 +72,11 @@ const Recents = () => {
                 variant='h6'
                 sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
               >
-                {recentsArray?.length} results
+                {recentsArray?.slice(0, 5).length} results
               </Typography>
             )}
           </Box>
-          <Divider sx={{ marginTop: 1 }} />
+          <Divider sx={{ marginTop: 1, marginBottom: 3 }} />
 
           {recentsArray?.length === 0 && (
             <Typography variant='body1'>
@@ -63,9 +84,13 @@ const Recents = () => {
             </Typography>
           )}
 
-          <Grid container spacing={2} sx={{ marginTop: { xs: 0, sm: 1 } }}>
-            {recentsArray?.map((plist) => (
-              <Grid item key={plist.playlistId} xs={12} sm={6} md={4} lg={3}>
+          <Carousel draggable responsive={responsive}>
+            {recentsArray?.slice(0, 5).map((plist) => (
+              <Box
+                key={plist.playlistId}
+                component='div'
+                className={styles.recents__carousel}
+              >
                 <SingleCard
                   channelId={plist.channelId}
                   channelName={plist.channelName}
@@ -75,9 +100,9 @@ const Recents = () => {
                   playlistDescription={plist.playlistDescription}
                   handleDelete={handleDelete}
                 />
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Carousel>
         </Container>
       </Box>
 
