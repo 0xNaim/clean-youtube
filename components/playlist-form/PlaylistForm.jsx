@@ -21,7 +21,7 @@ const PlaylistForm = ({ open, handleClose }) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const dispatch = useDispatch();
-  const { playlists } = useSelector((state) => state.playlists);
+  const { playlists, isLoading } = useSelector((state) => state.playlists);
 
   if (playlistId.includes('youtube.com/watch?')) {
     const match = /[&|\?]list=([a-zA-Z0-9_-]+)/gi.exec(playlistId);
@@ -114,7 +114,7 @@ const PlaylistForm = ({ open, handleClose }) => {
             onClick={handleSubmit}
             variant='contained'
             disableRipple
-            disabled={!playlistId}
+            disabled={!playlistId || isLoading}
           >
             + Add Playlist
           </Button>
