@@ -26,6 +26,7 @@ const SingleCard = ({
   addToFavoriteHandler,
   handleDelete,
   showFavorite = false,
+  onGoing = false,
 }) => {
   return (
     <Card className={styles.playlist__card}>
@@ -87,9 +88,14 @@ const SingleCard = ({
               </a>
             </Link>
 
-            <Typography className={styles.cardContent__ongoing} variant='body1'>
-              Ongoing
-            </Typography>
+            {onGoing && (
+              <Typography
+                className={styles.cardContent__ongoing}
+                variant='body1'
+              >
+                Ongoing
+              </Typography>
+            )}
           </Box>
 
           <Typography variant='body2'>

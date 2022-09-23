@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Favorites from '../components/favorites/Favorites';
 import Layout from '../components/layout';
 import Playlists from '../components/playlists/Playlists';
+import Recents from '../components/recents/Recents';
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <Layout>
         <Playlists />
         <Favorites />
+        <Recents />
       </Layout>
     </>
   );

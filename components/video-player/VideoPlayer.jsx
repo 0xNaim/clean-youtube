@@ -12,7 +12,8 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchRecentPlaylist } from '../../redux/recent/recentSlice';
 import Player from '../player/Player';
 import styles from './VideoPlayer.module.scss';
 
@@ -21,6 +22,8 @@ const VideoPlayer = () => {
     query: { playlistId },
   } = useRouter();
   const { playlists } = useSelector((state) => state.playlists || {});
+  const { recents } = useSelector((state) => state.recents || {});
+  const dispatch = useDispatch();
 
   const [activeVideoIndex, setVideoActiveIndex] = useState(1);
   const [showMore, setShowMore] = useState(false);
@@ -43,6 +46,12 @@ const VideoPlayer = () => {
     setActiveVideoId(videosArray && videosArray[0]?.contentDetails?.videoId);
     setActiveVideoTitle(videosArray && videosArray[0]?.title);
   }, [videosArray]);
+
+  useEffect(() => {
+    if (playlistId && !recents[playlistId]) {
+      dispatch(fetchRecentPlaylist(playlistId));
+    }
+  }, [dispatch, playlistId, recents]);
 
   return (
     <Container
@@ -171,7 +180,7 @@ const VideoPlayer = () => {
                       </Typography>
                       <img
                         className={styles.video__thumbnail}
-                        src={thumbnail.url}
+                        src={thumbnail?.url}
                         alt={title}
                       />
 

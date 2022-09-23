@@ -31,7 +31,10 @@ const Favorites = () => {
   return (
     <>
       {favoritesArray?.length > 0 && (
-        <Box component='div' className={styles.favorites__wrapper}>
+        <Box
+          component='div'
+          className={styles.favorites__wrapper}
+        >
           <Container maxWidth='xl'>
             <Box component='div' className={styles.favorites}>
               <Typography
