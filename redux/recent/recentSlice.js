@@ -36,7 +36,7 @@ const recentSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.error = '';
-        state.recents = { ...state.recents, ...action.payload };
+        state.recents = { ...action.payload, ...state.recents };
       })
       .addCase(fetchRecentPlaylist.rejected, (state, action) => {
         state.isLoading = false;
