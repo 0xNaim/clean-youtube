@@ -1,5 +1,6 @@
-import { Box, Container, Divider, Grid, Typography } from '@mui/material';
+import { Box, Container, Divider, Typography } from '@mui/material';
 import { useState } from 'react';
+import Carousel from 'react-multi-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePlaylistFromFavorite } from '../../redux/favorite/favoriteSlice';
 import Notify from '../../utils/Notify';
@@ -28,13 +29,30 @@ const Favorites = () => {
 
   const snackbarCloseHandler = () => setOpenSnackbar(false);
 
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 4,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+
   return (
     <>
       {favoritesArray?.length > 0 && (
-        <Box
-          component='div'
-          className={styles.favorites__wrapper}
-        >
+        <Box component='div' className={styles.favorites__wrapper}>
           <Container maxWidth='xl'>
             <Box component='div' className={styles.favorites}>
               <Typography
@@ -55,11 +73,15 @@ const Favorites = () => {
                 </Typography>
               )}
             </Box>
-            <Divider sx={{ marginTop: 1 }} />
+            <Divider sx={{ marginTop: 1, marginBottom: 3 }} />
 
-            <Grid container spacing={2} sx={{ marginTop: { xs: 0, sm: 1 } }}>
+            <Carousel draggable responsive={responsive}>
               {favoritesArray?.map((plist) => (
-                <Grid item key={plist.playlistId} xs={12} sm={6} md={4} lg={3}>
+                <Box
+                  className={styles.favorites__carousel}
+                  key={plist.playlistId}
+                  component='div'
+                >
                   <SingleCard
                     channelId={plist.channelId}
                     channelName={plist.channelName}
@@ -69,9 +91,9 @@ const Favorites = () => {
                     playlistDescription={plist.playlistDescription}
                     handleDelete={handleDelete}
                   />
-                </Grid>
+                </Box>
               ))}
-            </Grid>
+            </Carousel>
           </Container>
         </Box>
       )}
