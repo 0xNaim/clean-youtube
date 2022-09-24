@@ -51,22 +51,22 @@ const Recents = () => {
 
   return (
     <>
-      <Box
-        component='div'
-        className={styles.recents__wrapper}
-        sx={{ marginY: 5 }}
-      >
-        <Container maxWidth='xl'>
-          <Box component='div' className={styles.recents}>
-            <Typography
-              className={styles.recents__heading}
-              variant='h4'
-              sx={{ fontSize: { xs: 22, md: 28 } }}
-            >
-              Recent playlists
-            </Typography>
+      {recentsArray?.length > 0 && (
+        <Box
+          component='div'
+          className={styles.recents__wrapper}
+          sx={{ marginY: 5 }}
+        >
+          <Container maxWidth='xl'>
+            <Box component='div' className={styles.recents}>
+              <Typography
+                className={styles.recents__heading}
+                variant='h4'
+                sx={{ fontSize: { xs: 22, md: 28 } }}
+              >
+                Recent playlists
+              </Typography>
 
-            {recentsArray?.length > 0 && (
               <Typography
                 className={styles.recents__totalResult}
                 variant='h6'
@@ -74,37 +74,32 @@ const Recents = () => {
               >
                 {recentsArray?.slice(0, 5).length} results
               </Typography>
-            )}
-          </Box>
-          <Divider sx={{ marginTop: 1, marginBottom: 3 }} />
+            </Box>
+            <Divider sx={{ marginTop: 1, marginBottom: 3 }} />
 
-          {recentsArray?.length === 0 && (
-            <Typography variant='body1'>
-              There are no recent activity
-            </Typography>
-          )}
-
-          <Carousel draggable responsive={responsive}>
-            {recentsArray?.slice(0, 5).map((plist) => (
-              <Box
-                key={plist.playlistId}
-                component='div'
-                className={styles.recents__carousel}
-              >
-                <SingleCard
-                  channelId={plist.channelId}
-                  channelName={plist.channelName}
-                  playlistId={plist.playlistId}
-                  playlistTitle={plist.playlistTitle}
-                  playlistThumbnail={plist.playlistThumbnail}
-                  playlistDescription={plist.playlistDescription}
-                  handleDelete={handleDelete}
-                />
-              </Box>
-            ))}
-          </Carousel>
-        </Container>
-      </Box>
+            <Carousel draggable responsive={responsive}>
+              {recentsArray?.slice(0, 5).map((plist) => (
+                <Box
+                  key={plist.playlistId}
+                  component='div'
+                  className={styles.recents__carousel}
+                >
+                  <SingleCard
+                    channelId={plist.channelId}
+                    channelName={plist.channelName}
+                    playlistId={plist.playlistId}
+                    playlistTitle={plist.playlistTitle}
+                    playlistThumbnail={plist.playlistThumbnail}
+                    playlistDescription={plist.playlistDescription}
+                    handleDelete={handleDelete}
+                    tag='Watched'
+                  />
+                </Box>
+              ))}
+            </Carousel>
+          </Container>
+        </Box>
+      )}
 
       {deleteMessage && (
         <Notify

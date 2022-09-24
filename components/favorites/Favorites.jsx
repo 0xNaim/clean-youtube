@@ -63,15 +63,13 @@ const Favorites = () => {
                 Favorite Playlists
               </Typography>
 
-              {favoritesArray?.length > 0 && (
-                <Typography
-                  className={styles.favorites__totalResult}
-                  variant='h6'
-                  sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
-                >
-                  {favoritesArray?.length} results
-                </Typography>
-              )}
+              <Typography
+                className={styles.favorites__totalResult}
+                variant='h6'
+                sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
+              >
+                {favoritesArray?.length} results
+              </Typography>
             </Box>
             <Divider sx={{ marginTop: 1, marginBottom: 3 }} />
 
@@ -90,6 +88,7 @@ const Favorites = () => {
                     playlistThumbnail={plist.playlistThumbnail}
                     playlistDescription={plist.playlistDescription}
                     handleDelete={handleDelete}
+                    tag='Favorite'
                   />
                 </Box>
               ))}
