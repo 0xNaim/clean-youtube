@@ -99,7 +99,7 @@ const SingleCard = ({
           </Box>
 
           <Typography variant='body2'>
-            {playlistDescription?.substring(0, 80) ||
+            {playlistDescription?.substring(0, 70) ||
               ' Lorem ipsum dolor sit, amet consectetur adipisicing elit.' +
                 '...'}
           </Typography>
