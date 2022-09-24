@@ -65,22 +65,26 @@ const Playlists = () => {
 
   return (
     <>
-      <Box
-        component='div'
-        className={styles.playlists__wrapper}
-        sx={{ paddingY: 5 }}
-      >
-        <Container maxWidth='xl'>
-          <Box component='div' className={styles.playlists}>
-            <Typography
-              className={styles.playlists__heading}
-              variant='h4'
-              sx={{ fontSize: { xs: 22, md: 28 } }}
-            >
-              Ongoing Playlists
-            </Typography>
+      {playlistsArray?.length === 0 && (
+        <Typography variant='body1'>There are no playlist found</Typography>
+      )}
 
-            {playlistsArray?.length > 0 && (
+      {playlistsArray?.length > 0 && (
+        <Box
+          component='div'
+          className={styles.playlists__wrapper}
+          sx={{ paddingY: 5 }}
+        >
+          <Container maxWidth='xl'>
+            <Box component='div' className={styles.playlists}>
+              <Typography
+                className={styles.playlists__heading}
+                variant='h4'
+                sx={{ fontSize: { xs: 22, md: 28 } }}
+              >
+                Ongoing Playlists
+              </Typography>
+
               <Typography
                 className={styles.playlists__totalResult}
                 variant='h6'
@@ -88,40 +92,36 @@ const Playlists = () => {
               >
                 {playlistsArray?.length} results
               </Typography>
-            )}
-          </Box>
-          <Divider sx={{ marginTop: 1 }} />
+            </Box>
+            <Divider sx={{ marginTop: 1 }} />
 
-          {playlistsArray?.length === 0 && (
-            <Typography variant='body1'>There are no playlist found</Typography>
-          )}
-
-          <Carousel draggable responsive={responsive}>
-            {playlistsArray?.map((plist) => (
-              <Box
-                className={styles.playlists__carousel}
-                key={plist.playlistId}
-                component='div'
-              >
-                <SingleCard
-                  channelId={plist.channelId}
-                  channelName={plist.channelName}
-                  playlistId={plist.playlistId}
-                  playlistTitle={plist.playlistTitle}
-                  playlistThumbnail={plist.playlistThumbnail}
-                  playlistDescription={plist.playlistDescription}
-                  openSnackbar={openSnackbar}
-                  snackbarCloseHandler={snackbarCloseHandler}
-                  addToFavoriteHandler={addToFavoriteHandler}
-                  handleDelete={handleDelete}
-                  showFavorite
-                  onGoing
-                />
-              </Box>
-            ))}
-          </Carousel>
-        </Container>
-      </Box>
+            <Carousel draggable responsive={responsive}>
+              {playlistsArray?.map((plist) => (
+                <Box
+                  className={styles.playlists__carousel}
+                  key={plist.playlistId}
+                  component='div'
+                >
+                  <SingleCard
+                    channelId={plist.channelId}
+                    channelName={plist.channelName}
+                    playlistId={plist.playlistId}
+                    playlistTitle={plist.playlistTitle}
+                    playlistThumbnail={plist.playlistThumbnail}
+                    playlistDescription={plist.playlistDescription}
+                    openSnackbar={openSnackbar}
+                    snackbarCloseHandler={snackbarCloseHandler}
+                    addToFavoriteHandler={addToFavoriteHandler}
+                    handleDelete={handleDelete}
+                    showFavorite
+                    tag='Ongoing'
+                  />
+                </Box>
+              ))}
+            </Carousel>
+          </Container>
+        </Box>
+      )}
 
       {addMessage && (
         <Notify
