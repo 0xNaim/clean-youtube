@@ -93,7 +93,7 @@ const Playlists = () => {
                 {playlistsArray?.length} results
               </Typography>
             </Box>
-            <Divider sx={{ marginTop: 1 }} />
+            <Divider sx={{ marginTop: 1, marginBottom: 3 }} />
 
             <Carousel draggable responsive={responsive}>
               {playlistsArray?.map((plist) => (
