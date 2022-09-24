@@ -1,5 +1,6 @@
-import { Box, Container, Divider, Grid, Typography } from '@mui/material';
+import { Box, Container, Divider, Typography } from '@mui/material';
 import { useState } from 'react';
+import Carousel from 'react-multi-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFavoritePlaylist } from '../../redux/favorite/favoriteSlice';
 import { deletePlaylist } from '../../redux/playlist/playlistSlice';
@@ -42,17 +43,37 @@ const Playlists = () => {
 
   const snackbarCloseHandler = () => setOpenSnackbar(false);
 
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 4,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+
   return (
     <>
       <Box
         component='div'
-        className={styles.playlist__wrapper}
+        className={styles.playlists__wrapper}
         sx={{ paddingY: 5 }}
       >
         <Container maxWidth='xl'>
-          <Box component='div' className={styles.playlist}>
+          <Box component='div' className={styles.playlists}>
             <Typography
-              className={styles.playlist__heading}
+              className={styles.playlists__heading}
               variant='h4'
               sx={{ fontSize: { xs: 22, md: 28 } }}
             >
@@ -61,7 +82,7 @@ const Playlists = () => {
 
             {playlistsArray?.length > 0 && (
               <Typography
-                className={styles.playlist__totalResult}
+                className={styles.playlists__totalResult}
                 variant='h6'
                 sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
               >
@@ -75,9 +96,13 @@ const Playlists = () => {
             <Typography variant='body1'>There are no playlist found</Typography>
           )}
 
-          <Grid container spacing={2} sx={{ marginTop: { xs: 0, sm: 1 } }}>
+          <Carousel draggable responsive={responsive}>
             {playlistsArray?.map((plist) => (
-              <Grid item key={plist.playlistId} xs={12} sm={6} md={4} lg={3}>
+              <Box
+                className={styles.playlists__carousel}
+                key={plist.playlistId}
+                component='div'
+              >
                 <SingleCard
                   channelId={plist.channelId}
                   channelName={plist.channelName}
@@ -92,9 +117,9 @@ const Playlists = () => {
                   showFavorite
                   onGoing
                 />
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Carousel>
         </Container>
       </Box>
 

@@ -1,5 +1,5 @@
-.playlist__wrapper {
-  .playlist {
+.playlists__wrapper {
+  .playlists {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
@@ -8,5 +8,10 @@
     &__totalResult {
       font-weight: 700 !important;
     }
+  }
+
+  .playlists__carousel {
+    margin-right: 15px;
+    cursor: grab !important;
   }
 }
