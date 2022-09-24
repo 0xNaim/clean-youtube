@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecentPlaylist } from '../../redux/recent/recentSlice';
+import { fetchVideos } from '../../redux/videos/videosSlice';
 import Player from '../player/Player';
 import styles from './VideoPlayer.module.scss';
 
@@ -21,18 +22,21 @@ const VideoPlayer = () => {
   const {
     query: { playlistId },
   } = useRouter();
-  const { playlists } = useSelector((state) => state.playlists || {});
+  const {
+    videos: {
+      playlistVideos,
+      channelId,
+      channelName,
+      playlistTitle,
+      playlistDescription,
+    },
+  } = useSelector((state) => state.videos || {});
   const { recents } = useSelector((state) => state.recents || {});
   const dispatch = useDispatch();
 
   const [activeVideoIndex, setVideoActiveIndex] = useState(1);
   const [showMore, setShowMore] = useState(false);
 
-  const singlePlaylist = playlists[playlistId];
-  const { playlistTitle, playlistDescription, channelId, channelName } =
-    singlePlaylist || {};
-
-  const { playlistItems: videosArray } = singlePlaylist || {};
   const [activeVideoId, setActiveVideoId] = useState('');
   const [activeVideoTitle, setActiveVideoTitle] = useState('');
 
@@ -43,9 +47,15 @@ const VideoPlayer = () => {
   };
 
   useEffect(() => {
-    setActiveVideoId(videosArray && videosArray[0]?.contentDetails?.videoId);
-    setActiveVideoTitle(videosArray && videosArray[0]?.title);
-  }, [videosArray]);
+    dispatch(fetchVideos(playlistId));
+  }, [dispatch, playlistId]);
+
+  useEffect(() => {
+    setActiveVideoId(
+      playlistVideos && playlistVideos[0]?.contentDetails?.videoId
+    );
+    setActiveVideoTitle(playlistVideos && playlistVideos[0]?.title);
+  }, [playlistVideos]);
 
   useEffect(() => {
     if (playlistId && !recents[playlistId]) {
@@ -146,12 +156,12 @@ const VideoPlayer = () => {
                   <Typography
                     className={styles.subHeading__totalVideos}
                     variant='body2'
-                  >{`- ${activeVideoIndex} / ${videosArray?.length}`}</Typography>
+                  >{`- ${activeVideoIndex} / ${playlistVideos?.length}`}</Typography>
                 </Box>
               </Box>
 
               <Box component='div' className={styles.video__wrapper}>
-                {videosArray?.map((video, index) => {
+                {playlistVideos?.map((video, index) => {
                   const {
                     contentDetails: { videoId },
                     title,
@@ -186,7 +196,7 @@ const VideoPlayer = () => {
 
                       <Box component={'div'}>
                         <Typography variant='body2' sx={{ fontWeight: 500 }}>
-                          {title.substring(0, 50)}
+                          {title?.substring(0, 50)}
                         </Typography>
                         <Typography
                           className={styles.video__channelName}
