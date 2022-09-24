@@ -22,15 +22,7 @@ const VideoPlayer = () => {
   const {
     query: { playlistId },
   } = useRouter();
-  const {
-    videos: {
-      playlistVideos,
-      channelId,
-      channelName,
-      playlistTitle,
-      playlistDescription,
-    },
-  } = useSelector((state) => state.videos || {});
+  const { videos } = useSelector((state) => state.videos || {});
   const { recents } = useSelector((state) => state.recents || {});
   const dispatch = useDispatch();
 
@@ -39,6 +31,14 @@ const VideoPlayer = () => {
 
   const [activeVideoId, setActiveVideoId] = useState('');
   const [activeVideoTitle, setActiveVideoTitle] = useState('');
+
+  const {
+    playlistVideos,
+    channelId,
+    channelName,
+    playlistTitle,
+    playlistDescription,
+  } = videos || {};
 
   const handleState = (index, videoId, title) => {
     setVideoActiveIndex(index);
@@ -64,157 +64,180 @@ const VideoPlayer = () => {
   }, [dispatch, playlistId, recents]);
 
   return (
-    <Container
-      maxWidth='xl'
-      sx={{ paddingY: 4 }}
-      className={styles.video__player}
-    >
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={8} className={styles.leftSide}>
-          <Player videoId={activeVideoId} />
-          <Box component='div' className={styles.leftSide__description}>
-            <Link href={`https://www.youtube.com/playlist?list=${playlistId}`}>
-              <a className={styles.leftSide__link} target={'_blank'}>
-                <Typography className={styles.leftSide__link} variant='body2'>
-                  {playlistTitle}
-                </Typography>
-              </a>
-            </Link>
-            <Typography variant='h6' sx={{ fontWeight: 'normal' }}>
-              {activeVideoTitle}
-            </Typography>
-          </Box>
+    <>
+      {Object.keys(videos)?.length === 0 && (
+        <Box component='div' sx={{ textAlign: 'center', marginY: 5 }}>
+          <Typography variant='body1'>There was an error occurred</Typography>
+        </Box>
+      )}
 
-          <Box component='div' className={styles.channel__description}>
-            <Avatar>{channelName?.split(' ')[0]?.charAt(0)}</Avatar>
-
-            <Box component='div' className={styles.description}>
-              <Link href={`https://www.youtube.com/channel/${channelName}`}>
-                <a className={styles.link} target={'_blank'}>
-                  <Typography
-                    variant='h6'
-                    sx={{
-                      fontWeight: 'normal',
-                      fontSize: 16,
-                      display: 'inline-block',
-                    }}
-                    title={channelName}
-                  >
-                    {channelName}
-                  </Typography>
-                </a>
-              </Link>
-              <Typography variant='body2'>{playlistTitle}</Typography>
-              <Typography variant='body2'>
-                {showMore
-                  ? playlistDescription
-                  : playlistDescription?.substring(0, 250)}
-              </Typography>
-              <Button
-                disableRipple
-                className={styles.description__showMore}
-                onClick={() => setShowMore(!showMore)}
-              >
-                {showMore ? 'Show Less' : 'Show More'}
-              </Button>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Card>
-            <CardContent className={styles.rightSide}>
-              <Box component='div'>
+      {playlistVideos && (
+        <Container
+          maxWidth='xl'
+          sx={{ paddingY: 4 }}
+          className={styles.video__player}
+        >
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={8} className={styles.leftSide}>
+              <Player videoId={activeVideoId} />
+              <Box component='div' className={styles.leftSide__description}>
                 <Link
                   href={`https://www.youtube.com/playlist?list=${playlistId}`}
                 >
-                  <a target='_blank' className={styles.link}>
+                  <a className={styles.leftSide__link} target={'_blank'}>
                     <Typography
-                      title={playlistTitle}
+                      className={styles.leftSide__link}
                       variant='body2'
-                      sx={{ fontWeight: 500 }}
                     >
-                      {playlistTitle?.substring(0, 55) + '...'}
+                      {playlistTitle}
                     </Typography>
                   </a>
                 </Link>
+                <Typography variant='h6' sx={{ fontWeight: 'normal' }}>
+                  {activeVideoTitle}
+                </Typography>
+              </Box>
 
-                <Box component='div' className={styles.rightSide__subHeading}>
-                  <Link href={`https://www.youtube.com/channel/${channelId}`}>
-                    <a
-                      target={'_blank'}
-                      className={styles.link}
-                      title={channelName}
-                    >
+              <Box component='div' className={styles.channel__description}>
+                <Avatar>{channelName?.split(' ')[0]?.charAt(0)}</Avatar>
+
+                <Box component='div' className={styles.description}>
+                  <Link href={`https://www.youtube.com/channel/${channelName}`}>
+                    <a className={styles.link} target={'_blank'}>
                       <Typography
-                        className={styles.subHeading__channelName}
-                        variant='body2'
+                        variant='h6'
+                        sx={{
+                          fontWeight: 'normal',
+                          fontSize: 16,
+                          display: 'inline-block',
+                        }}
+                        title={channelName}
                       >
-                        {channelName}&nbsp;
+                        {channelName}
                       </Typography>
                     </a>
                   </Link>
-                  <Typography
-                    className={styles.subHeading__totalVideos}
-                    variant='body2'
-                  >{`- ${activeVideoIndex} / ${playlistVideos?.length}`}</Typography>
+                  <Typography variant='body2'>{playlistTitle}</Typography>
+                  <Typography variant='body2'>
+                    {showMore
+                      ? playlistDescription
+                      : playlistDescription?.substring(0, 250)}
+                  </Typography>
+                  <Button
+                    disableRipple
+                    className={styles.description__showMore}
+                    onClick={() => setShowMore(!showMore)}
+                  >
+                    {showMore ? 'Show Less' : 'Show More'}
+                  </Button>
                 </Box>
               </Box>
-
-              <Box component='div' className={styles.video__wrapper}>
-                {playlistVideos?.map((video, index) => {
-                  const {
-                    contentDetails: { videoId },
-                    title,
-                    thumbnail,
-                  } = video || {};
-
-                  return (
-                    <Box
-                      className={
-                        activeVideoIndex === index + 1
-                          ? `${styles.video} ${styles.active}`
-                          : `${styles.video}`
-                      }
-                      key={videoId}
-                      onClick={() => handleState(index + 1, videoId, title)}
-                      title={title}
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Card>
+                <CardContent className={styles.rightSide}>
+                  <Box component='div'>
+                    <Link
+                      href={`https://www.youtube.com/playlist?list=${playlistId}`}
                     >
-                      <Typography variant='body2'>
-                        {activeVideoIndex === index + 1 ? (
-                          <PlayArrowIcon
-                            sx={{ fontSize: 16, color: '#6b6b6b' }}
-                          />
-                        ) : (
-                          index + 1
-                        )}
-                      </Typography>
-                      <img
-                        className={styles.video__thumbnail}
-                        src={thumbnail?.url}
-                        alt={title}
-                      />
-
-                      <Box component={'div'}>
-                        <Typography variant='body2' sx={{ fontWeight: 500 }}>
-                          {title?.substring(0, 50)}
-                        </Typography>
+                      <a target='_blank' className={styles.link}>
                         <Typography
-                          className={styles.video__channelName}
+                          title={playlistTitle}
                           variant='body2'
                           sx={{ fontWeight: 500 }}
                         >
-                          {channelName}
+                          {playlistTitle?.substring(0, 55) + '...'}
                         </Typography>
-                      </Box>
+                      </a>
+                    </Link>
+
+                    <Box
+                      component='div'
+                      className={styles.rightSide__subHeading}
+                    >
+                      <Link
+                        href={`https://www.youtube.com/channel/${channelId}`}
+                      >
+                        <a
+                          target={'_blank'}
+                          className={styles.link}
+                          title={channelName}
+                        >
+                          <Typography
+                            className={styles.subHeading__channelName}
+                            variant='body2'
+                          >
+                            {channelName}&nbsp;
+                          </Typography>
+                        </a>
+                      </Link>
+                      <Typography
+                        className={styles.subHeading__totalVideos}
+                        variant='body2'
+                      >{`- ${activeVideoIndex} / ${playlistVideos?.length}`}</Typography>
                     </Box>
-                  );
-                })}
-              </Box>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-    </Container>
+                  </Box>
+
+                  <Box component='div' className={styles.video__wrapper}>
+                    {playlistVideos?.map((video, index) => {
+                      const {
+                        contentDetails: { videoId },
+                        title,
+                        thumbnail,
+                      } = video || {};
+
+                      return (
+                        <Box
+                          className={
+                            activeVideoIndex === index + 1
+                              ? `${styles.video} ${styles.active}`
+                              : `${styles.video}`
+                          }
+                          key={videoId}
+                          onClick={() => handleState(index + 1, videoId, title)}
+                          title={title}
+                        >
+                          <Typography variant='body2'>
+                            {activeVideoIndex === index + 1 ? (
+                              <PlayArrowIcon
+                                sx={{ fontSize: 16, color: '#6b6b6b' }}
+                              />
+                            ) : (
+                              index + 1
+                            )}
+                          </Typography>
+                          <img
+                            className={styles.video__thumbnail}
+                            src={thumbnail?.url}
+                            alt={title}
+                          />
+
+                          <Box component={'div'}>
+                            <Typography
+                              variant='body2'
+                              sx={{ fontWeight: 500 }}
+                            >
+                              {title?.substring(0, 50)}
+                            </Typography>
+                            <Typography
+                              className={styles.video__channelName}
+                              variant='body2'
+                              sx={{ fontWeight: 500 }}
+                            >
+                              {channelName}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      );
+                    })}
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          </Grid>
+        </Container>
+      )}
+    </>
   );
 };
 
