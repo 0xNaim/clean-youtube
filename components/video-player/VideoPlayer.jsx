@@ -24,7 +24,7 @@ const VideoPlayer = () => {
   const {
     query: { playlistId },
   } = useRouter();
-  const { videos } = useSelector((state) => state.videos || {});
+  const { videos, isLoading } = useSelector((state) => state.videos || {});
   const { recents } = useSelector((state) => state.recents || {});
   const dispatch = useDispatch();
 
@@ -83,9 +83,9 @@ const VideoPlayer = () => {
 
   return (
     <>
-      {Object.keys(videos)?.length === 0 && (
+      {isLoading && (
         <Box component='div' sx={{ textAlign: 'center', marginY: 5 }}>
-          <Typography variant='body1'>There was an error occurred</Typography>
+          <Typography variant='body1'>Loading...</Typography>
         </Box>
       )}
 

@@ -25,6 +25,10 @@ const videosSlice = createSlice({
     builder
       .addCase(fetchVideos.pending, (state) => {
         state.isLoading = true;
+        state.isSuccess = false;
+        state.isError = false;
+        state.error = '';
+        state.videos = {};
       })
       .addCase(fetchVideos.fulfilled, (state, action) => {
         state.isLoading = false;
