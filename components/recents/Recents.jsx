@@ -106,6 +106,7 @@ const Recents = () => {
           openSnackbar={openSnackbar}
           closeSnackbar={snackbarCloseHandler}
           message={deleteMessage}
+          severity='error'
         />
       )}
     </>

@@ -1,6 +1,6 @@
 import { Alert, Snackbar } from '@mui/material';
 
-const Notify = ({ openSnackbar, closeSnackbar, message, success = false }) => (
+const Notify = ({ openSnackbar, closeSnackbar, message, severity }) => (
   <Snackbar
     open={openSnackbar}
     autoHideDuration={3000}
@@ -9,7 +9,7 @@ const Notify = ({ openSnackbar, closeSnackbar, message, success = false }) => (
   >
     <Alert
       onClose={closeSnackbar}
-      severity={success ? 'success' : 'error'}
+      severity={severity}
       sx={{ width: '100%' }}
     >
       {message}
