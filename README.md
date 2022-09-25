@@ -19,38 +19,34 @@
 ## How to run
 
 1. Clone this repository -
-   ```sh
-    https://github.com/0xNaim/clean-youtube.git
-   ```
+```sh
+  https://github.com/0xNaim/clean-youtube.git
+```
+
 2. Go to the cloned project directory
-   ```sh
-    cd clean-youtube
-   ```
+```sh
+  cd clean-youtube
+```
+
 3. Install the dependencies
-
-   ```sh
-    npm install
-   ```
-
-   or
-
-   ```sh
-    yarn
-   ```
+```sh
+  npm install
+```
+or
+```sh
+  yarn
+```
 
 4. Start the development server
-
-   ```sh
-    npm run dev
-   ```
-
-   or
-
-   ```sh
-    yarn dev
-   ```
+```sh
+  npm run dev
+```
+or
+```sh
+  yarn dev
+```
 
 5. Open url on your browser
-   ```sh
-    http://localhost:3000
-   ```
+```sh
+  http://localhost:3000
+```
