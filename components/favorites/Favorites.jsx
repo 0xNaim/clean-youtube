@@ -83,6 +83,7 @@ const Favorites = () => {
                   className={styles.favorites__carousel}
                   key={plist.playlistId}
                   component='div'
+                  sx={{ marginY: 0.2, marginX: 0.2 }}
                 >
                   <SingleCard
                     channelId={plist.channelId}
