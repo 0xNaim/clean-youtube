@@ -162,13 +162,15 @@ const VideoPlayer = () => {
                       ? playlistDescription
                       : playlistDescription?.substring(0, 250)}
                   </Typography>
-                  <Button
-                    disableRipple
-                    className={styles.description__showMore}
-                    onClick={() => setShowMore(!showMore)}
-                  >
-                    {showMore ? 'Show Less' : 'Show More'}
-                  </Button>
+                  {playlistDescription && (
+                    <Button
+                      disableRipple
+                      className={styles.description__showMore}
+                      onClick={() => setShowMore(!showMore)}
+                    >
+                      {showMore ? 'Show Less' : 'Show More'}
+                    </Button>
+                  )}
                 </Box>
               </Box>
             </Grid>
