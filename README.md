@@ -20,7 +20,7 @@
 
 1. Clone this repository -
    ```sh
-   https://github.com/0xNaim/clean-youtube.git
+    https://github.com/0xNaim/clean-youtube.git
    ```
 2. Go to the cloned project directory
    ```sh
@@ -35,7 +35,7 @@
    or
 
    ```sh
-   yarn
+    yarn
    ```
 
 4. Start the development server
@@ -47,7 +47,7 @@
    or
 
    ```sh
-     yarn dev
+    yarn dev
    ```
 
 5. Open url on your browser
