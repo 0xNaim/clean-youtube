@@ -62,7 +62,7 @@ const Navbar = () => {
           </Box>
 
           <Box component='div' sx={{ marginLeft: 'auto' }}>
-            <Link href='https://github.com/0xNaim'>
+            <Link href='https://github.com/0xNaim/clean-youtube.git'>
               <a className={styles.navbar__link} target='_blank'>
                 <Tooltip title='GitHub Repository'>
                   <IconButton sx={{ marginRight: { xs: 0, sm: 1 } }}>
