@@ -75,7 +75,7 @@ const Playlists = () => {
         <Box
           component='div'
           className={styles.playlists__wrapper}
-          sx={{ paddingY: 5 }}
+          sx={{ marginY: 5 }}
         >
           <Container maxWidth='xl'>
             <Box component='div' className={styles.playlists}>

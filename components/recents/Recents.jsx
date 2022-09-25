@@ -55,7 +55,7 @@ const Recents = () => {
         <Box
           component='div'
           className={styles.recents__wrapper}
-          sx={{ marginY: 5 }}
+          sx={{ marginBottom: 5 }}
         >
           <Container maxWidth='xl'>
             <Box component='div' className={styles.recents}>
