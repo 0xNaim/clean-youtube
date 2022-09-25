@@ -1,3 +1,5 @@
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import {
   Avatar,
@@ -40,6 +42,22 @@ const VideoPlayer = () => {
     playlistDescription,
   } = videos || {};
 
+  const handlePrev = () => {
+    setVideoActiveIndex((prev) => prev - 1);
+    setActiveVideoId(
+      playlistVideos[activeVideoIndex - 2]?.contentDetails?.videoId
+    );
+    setActiveVideoTitle(playlistVideos[activeVideoIndex - 2]?.title);
+    console.log('Prev -> ', activeVideoIndex);
+  };
+
+  const handleNext = () => {
+    setVideoActiveIndex((prev) => prev + 1);
+    setActiveVideoId(playlistVideos[activeVideoIndex]?.contentDetails?.videoId);
+    setActiveVideoTitle(playlistVideos[activeVideoIndex]?.title);
+    console.log('Next -> ', activeVideoIndex);
+  };
+
   const handleState = (index, videoId, title) => {
     setVideoActiveIndex(index);
     setActiveVideoId(videoId);
@@ -80,6 +98,27 @@ const VideoPlayer = () => {
           <Grid container spacing={4}>
             <Grid item xs={12} md={8} className={styles.leftSide}>
               <Player videoId={activeVideoId} />
+              <Box component='div' className={styles.leftSide__btnGroup}>
+                <Button
+                  onClick={handlePrev}
+                  className={styles.btnGroup__btn}
+                  disableRipple
+                  disabled={activeVideoIndex === 1}
+                  sx={{ paddingRight: 2.5 }}
+                >
+                  <NavigateBeforeIcon />
+                  Prev
+                </Button>
+                <Button
+                  onClick={handleNext}
+                  className={styles.btnGroup__btn}
+                  disableRipple
+                  disabled={activeVideoIndex === playlistVideos.length}
+                  sx={{ paddingLeft: 2.5 }}
+                >
+                  Next <NavigateNextIcon />
+                </Button>
+              </Box>
               <Box component='div' className={styles.leftSide__description}>
                 <Link
                   href={`https://www.youtube.com/playlist?list=${playlistId}`}

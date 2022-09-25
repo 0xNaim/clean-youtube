@@ -1,8 +1,30 @@
 .video__player {
   .leftSide {
-    .leftSide__description {
-      margin: 10px 0px !important;
+    &__btnGroup {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
 
+      .btnGroup__btn {
+        background: #0ea5a0 !important;
+        color: #fff !important;
+        text-transform: capitalize !important;
+        font-size: 0.8rem !important;
+        box-shadow: none !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin: 10px 0px !important;
+
+        &:disabled {
+          background: #0ea5a0ab !important;
+          cursor: not-allowed;
+          cursor: -moz-not-allowed;
+          cursor: -webkit-not-allowed;
+        }
+      }
+    }
+
+    .leftSide__description {
       .leftSide__link {
         font-size: 12px !important;
         text-decoration: none !important;

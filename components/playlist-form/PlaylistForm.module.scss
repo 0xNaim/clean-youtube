@@ -13,6 +13,9 @@
 
     &:disabled {
       background: #0ea5a0ab !important;
+      cursor: not-allowed;
+      cursor: -moz-not-allowed;
+      cursor: -webkit-not-allowed;
     }
   }
 }
