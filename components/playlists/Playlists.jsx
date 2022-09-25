@@ -67,7 +67,7 @@ const Playlists = () => {
     <>
       {playlistsArray?.length === 0 && (
         <Box component='div' sx={{ textAlign: 'center', marginY: 5 }}>
-          <Typography variant='body1'>There are no playlist found</Typography>
+          <Typography variant='body1'>There are no playlists found</Typography>
         </Box>
       )}
 
