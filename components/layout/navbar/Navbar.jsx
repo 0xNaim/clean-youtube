@@ -48,17 +48,31 @@ const Navbar = () => {
                 </Typography>
               </a>
             </Link>
-            <Link href='https://www.facebook.com/0xNaim'>
-              <a className={styles.navbar__link} target='_blank'>
-                <Typography
-                  variant='body1'
-                  className={styles.navbar__subheading}
-                  sx={{ display: { xs: 'none', md: 'block' } }}
-                >
-                  By 0xNaim
-                </Typography>
-              </a>
-            </Link>
+            <Box
+              component='div'
+              className={styles.navbar__subheading}
+              sx={{ display: { xs: 'none', md: 'block' } }}
+            >
+              <Typography
+                variant='body1'
+                fontFamily={'Dank Mono Italic'}
+                fontWeight={700}
+              >
+                By
+              </Typography>
+              <Link href='https://www.facebook.com/0xNaim'>
+                <a className={styles.navbar__link} target='_blank'>
+                  <Typography
+                    variant='body1'
+                    fontFamily={'Dank Mono Italic'}
+                    fontWeight={700}
+                    sx={{ marginLeft: 1 }}
+                  >
+                    0xNaim
+                  </Typography>
+                </a>
+              </Link>
+            </Box>
           </Box>
 
           <Box component='div' sx={{ marginLeft: 'auto' }}>
