@@ -55,7 +55,7 @@ const Recents = () => {
         <Box
           component='div'
           className={styles.recents__wrapper}
-          sx={{ marginY: 5 }}
+          sx={{ marginBottom: 5 }}
         >
           <Container maxWidth='xl'>
             <Box component='div' className={styles.recents}>
@@ -83,6 +83,7 @@ const Recents = () => {
                   key={plist.playlistId}
                   component='div'
                   className={styles.recents__carousel}
+                  sx={{ marginY: 0.2, marginX: 0.2 }}
                 >
                   <SingleCard
                     channelId={plist.channelId}

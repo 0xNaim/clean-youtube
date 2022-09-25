@@ -75,7 +75,7 @@ const Playlists = () => {
         <Box
           component='div'
           className={styles.playlists__wrapper}
-          sx={{ paddingY: 5 }}
+          sx={{ marginY: 5 }}
         >
           <Container maxWidth='xl'>
             <Box component='div' className={styles.playlists}>
@@ -103,6 +103,7 @@ const Playlists = () => {
                   className={styles.playlists__carousel}
                   key={plist.playlistId}
                   component='div'
+                  sx={{ marginY: 0.2, marginX: 0.2 }}
                 >
                   <SingleCard
                     channelId={plist.channelId}
