@@ -83,7 +83,7 @@ const Recents = () => {
                   key={plist.playlistId}
                   component='div'
                   className={styles.recents__carousel}
-                  sx={{ marginY: 0.2, marginX: 0.2 }}
+                  sx={{ margin: 0.2 }}
                 >
                   <SingleCard
                     channelId={plist.channelId}
