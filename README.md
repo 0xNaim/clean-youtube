@@ -46,7 +46,6 @@ or
 yarn dev
 ```
 
-
 5. Open url on your browser
 ```sh
 http://localhost:3000
