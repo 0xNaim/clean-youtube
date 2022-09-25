@@ -48,14 +48,14 @@ const Navbar = () => {
                 </Typography>
               </a>
             </Link>
-            <Link href='https://www.youtube.com/c/StackLearner'>
+            <Link href='https://www.facebook.com/0xNaim'>
               <a className={styles.navbar__link} target='_blank'>
                 <Typography
                   variant='body1'
                   className={styles.navbar__subheading}
                   sx={{ display: { xs: 'none', md: 'block' } }}
                 >
-                  By Stack Learner
+                  By 0xNaim
                 </Typography>
               </a>
             </Link>
