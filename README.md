@@ -1,6 +1,6 @@
 <!-- PROJECT COVER IMAGE -->
 <div align='center'>
-  <img src='https://github.com/0xNaim/clean-youtube/blob/main/public/clean-youtube.jpg?raw=true' />
+  <img src='' />
   <h1 align='center'><a href='https://clean-youtube-mocha.vercel.app/' target='_blank'>Clean YouTube</a></h1>
 </div>
 
