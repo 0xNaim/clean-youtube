@@ -102,6 +102,7 @@ const Favorites = () => {
           openSnackbar={openSnackbar}
           closeSnackbar={snackbarCloseHandler}
           message={deleteMessage}
+          severity='error'
         />
       )}
     </>

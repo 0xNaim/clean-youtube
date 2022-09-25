@@ -130,7 +130,7 @@ const Playlists = () => {
           openSnackbar={openSnackbar}
           closeSnackbar={snackbarCloseHandler}
           message={addMessage}
-          success
+          severity='success'
         />
       )}
 
@@ -139,6 +139,7 @@ const Playlists = () => {
           openSnackbar={openSnackbar}
           closeSnackbar={snackbarCloseHandler}
           message={deleteMessage}
+          severity='error'
         />
       )}
     </>

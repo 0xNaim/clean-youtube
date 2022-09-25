@@ -125,6 +125,7 @@ const PlaylistForm = ({ open, handleClose }) => {
           openSnackbar={openSnackbar}
           closeSnackbar={snackbarCloseHandler}
           message={errorMessage}
+          severity='error'
         />
       )}
 
@@ -133,7 +134,7 @@ const PlaylistForm = ({ open, handleClose }) => {
           openSnackbar={openSnackbar}
           closeSnackbar={snackbarCloseHandler}
           message={successMessage}
-          success
+          severity='success'
         />
       )}
     </>
