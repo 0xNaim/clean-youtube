@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Clean YouTube</title>
+        <title>Home || Clean YouTube</title>
         <meta
           name='viewport'
           content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
