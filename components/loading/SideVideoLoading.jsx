@@ -14,8 +14,8 @@ const SideVideoLoading = () => {
         />
       </Box>
       <Box component='div' sx={{ width: '58%' }}>
-        <Skeleton variant='text' animation='wave' sx={{ fontSize: '2rem' }} />
-        <Skeleton variant='text' animation='wave' width={'40%'} />
+        <Skeleton variant='text' animation='wave' sx={{ fontSize: '3rem' }} />
+        <Skeleton variant='text' animation='wave' width={'50%'} />
       </Box>
     </Box>
   );

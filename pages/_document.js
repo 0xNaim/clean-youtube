@@ -7,7 +7,7 @@ const Document = () => {
         <meta charSet='utf-8' />
         <meta
           name='description'
-          content="Clean youtube is a simple youtube playlist player. It was created for serious learners who really want to learn. When they watch YouTube videos, their attention is lost to other video suggestions that's why Clean YouTube comes."
+          content="Clean YouTube is a simple youtube playlist player. It was created for serious learners who really want to learn. When they watch YouTube videos, their attention is lost to other video suggestions that's why Clean YouTube comes."
         />
         <meta name='theme-color' content='#fff' />
         <meta name='mobile-web-app-capable' content='yes' />
