@@ -1,0 +1,20 @@
+.notFound {
+  height: 90vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+
+  &__link {
+    text-decoration: none !important;
+
+    .notFound__btn {
+      font-weight: 700 !important;
+      background: #0ea5a0 !important;
+      color: #fff !important;
+      text-transform: capitalize !important;
+      box-shadow: none !important;
+      padding: 5px 15px !important;
+    }
+  }
+}
