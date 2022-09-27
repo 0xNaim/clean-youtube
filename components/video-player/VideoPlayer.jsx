@@ -17,6 +17,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecentPlaylist } from '../../redux/recent/recentSlice';
 import { fetchVideos } from '../../redux/videos/videosSlice';
+import SideVideoHead from '../loading/SideVideoHead';
+import SideVideoLoading from '../loading/SideVideoLoading';
+import VideoPlayerLoading from '../loading/VideoPlayerLoading';
 import Player from '../player/Player';
 import styles from './VideoPlayer.module.scss';
 
@@ -83,100 +86,109 @@ const VideoPlayer = () => {
 
   return (
     <>
-      {isLoading && (
+      {/* {isLoading && (
         <Box component='div' sx={{ textAlign: 'center', marginY: 5 }}>
           <Typography variant='body1'>Loading...</Typography>
         </Box>
-      )}
+      )} */}
 
-      {playlistVideos && (
-        <Container
-          maxWidth='xl'
-          sx={{ paddingY: 4 }}
-          className={styles.video__player}
-        >
-          <Grid container spacing={4}>
-            <Grid item xs={12} md={8} className={styles.leftSide}>
-              <Player videoId={activeVideoId} />
-              <Box component='div' className={styles.leftSide__btnGroup}>
-                <Button
-                  onClick={handlePrev}
-                  className={styles.btnGroup__btn}
-                  disableRipple
-                  disabled={activeVideoIndex === 1}
-                  sx={{ paddingRight: 2.5 }}
-                >
-                  <NavigateBeforeIcon />
-                  Prev
-                </Button>
-                <Button
-                  onClick={handleNext}
-                  className={styles.btnGroup__btn}
-                  disableRipple
-                  disabled={activeVideoIndex === playlistVideos.length}
-                  sx={{ paddingLeft: 2.5 }}
-                >
-                  Next <NavigateNextIcon />
-                </Button>
-              </Box>
-              <Box component='div' className={styles.leftSide__description}>
-                <Link
-                  href={`https://www.youtube.com/playlist?list=${playlistId}`}
-                >
-                  <a className={styles.leftSide__link} target={'_blank'}>
-                    <Typography
-                      className={styles.leftSide__link}
-                      variant='body2'
-                    >
-                      {playlistTitle}
-                    </Typography>
-                  </a>
-                </Link>
-                <Typography variant='h6' sx={{ fontWeight: 'normal' }}>
-                  {activeVideoTitle}
-                </Typography>
-              </Box>
+      <Container
+        maxWidth='xl'
+        sx={{ paddingY: 4 }}
+        className={styles.video__player}
+      >
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={8} className={styles.leftSide}>
+            {!isLoading && playlistVideos ? (
+              <>
+                <Player videoId={activeVideoId} />
 
-              <Box component='div' className={styles.channel__description}>
-                <Avatar>{channelName?.split(' ')[0]?.charAt(0)}</Avatar>
-
-                <Box component='div' className={styles.description}>
-                  <Link href={`https://www.youtube.com/channel/${channelName}`}>
-                    <a className={styles.link} target={'_blank'}>
+                <Box component='div' className={styles.leftSide__btnGroup}>
+                  <Button
+                    onClick={handlePrev}
+                    className={styles.btnGroup__btn}
+                    disableRipple
+                    disabled={activeVideoIndex === 1}
+                    sx={{ paddingRight: 2.5 }}
+                  >
+                    <NavigateBeforeIcon />
+                    Prev
+                  </Button>
+                  <Button
+                    onClick={handleNext}
+                    className={styles.btnGroup__btn}
+                    disableRipple
+                    disabled={activeVideoIndex === playlistVideos?.length}
+                    sx={{ paddingLeft: 2.5 }}
+                  >
+                    Next <NavigateNextIcon />
+                  </Button>
+                </Box>
+                <Box component='div' className={styles.leftSide__description}>
+                  <Link
+                    href={`https://www.youtube.com/playlist?list=${playlistId}`}
+                  >
+                    <a className={styles.leftSide__link} target={'_blank'}>
                       <Typography
-                        variant='h6'
-                        sx={{
-                          fontWeight: 'normal',
-                          fontSize: 16,
-                          display: 'inline-block',
-                        }}
-                        title={channelName}
+                        className={styles.leftSide__link}
+                        variant='body2'
                       >
-                        {channelName}
+                        {playlistTitle}
                       </Typography>
                     </a>
                   </Link>
-                  <Typography variant='body2'>{playlistTitle}</Typography>
-                  <Typography variant='body2'>
-                    {showMore
-                      ? playlistDescription
-                      : playlistDescription?.substring(0, 250)}
+                  <Typography variant='h6' sx={{ fontWeight: 'normal' }}>
+                    {activeVideoTitle}
                   </Typography>
-                  {playlistDescription && (
-                    <Button
-                      disableRipple
-                      className={styles.description__showMore}
-                      onClick={() => setShowMore(!showMore)}
-                    >
-                      {showMore ? 'Show Less' : 'Show More'}
-                    </Button>
-                  )}
                 </Box>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Card>
-                <CardContent className={styles.rightSide}>
+
+                <Box component='div' className={styles.channel__description}>
+                  <Avatar>{channelName?.split(' ')[0]?.charAt(0)}</Avatar>
+
+                  <Box component='div' className={styles.description}>
+                    <Link
+                      href={`https://www.youtube.com/channel/${channelName}`}
+                    >
+                      <a className={styles.link} target={'_blank'}>
+                        <Typography
+                          variant='h6'
+                          sx={{
+                            fontWeight: 'normal',
+                            fontSize: 16,
+                            display: 'inline-block',
+                          }}
+                          title={channelName}
+                        >
+                          {channelName}
+                        </Typography>
+                      </a>
+                    </Link>
+                    <Typography variant='body2'>{playlistTitle}</Typography>
+                    <Typography variant='body2'>
+                      {showMore
+                        ? playlistDescription
+                        : playlistDescription?.substring(0, 250)}
+                    </Typography>
+                    {playlistDescription && (
+                      <Button
+                        disableRipple
+                        className={styles.description__showMore}
+                        onClick={() => setShowMore(!showMore)}
+                      >
+                        {showMore ? 'Show Less' : 'Show More'}
+                      </Button>
+                    )}
+                  </Box>
+                </Box>
+              </>
+            ) : (
+              <VideoPlayerLoading />
+            )}
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Card>
+              <CardContent className={styles.rightSide}>
+                {!isLoading && playlistVideos ? (
                   <Box component='div'>
                     <Link
                       href={`https://www.youtube.com/playlist?list=${playlistId}`}
@@ -218,7 +230,11 @@ const VideoPlayer = () => {
                       >{`- ${activeVideoIndex} / ${playlistVideos?.length}`}</Typography>
                     </Box>
                   </Box>
+                ) : (
+                  <SideVideoHead />
+                )}
 
+                {!isLoading && playlistVideos ? (
                   <Box component='div' className={styles.video__wrapper}>
                     {playlistVideos?.map((video, index) => {
                       const {
@@ -272,12 +288,19 @@ const VideoPlayer = () => {
                       );
                     })}
                   </Box>
-                </CardContent>
-              </Card>
-            </Grid>
+                ) : (
+                  <>
+                    <SideVideoLoading />
+                    <SideVideoLoading />
+                    <SideVideoLoading />
+                    <SideVideoLoading />
+                  </>
+                )}
+              </CardContent>
+            </Card>
           </Grid>
-        </Container>
-      )}
+        </Grid>
+      </Container>
     </>
   );
 };
