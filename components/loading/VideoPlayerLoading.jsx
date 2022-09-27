@@ -22,17 +22,17 @@ const VideoPlayerLoading = () => {
           variant='text'
           animation='wave'
           width={'10%'}
-          sx={{ fontSize: '3rem' }}
+          sx={{ fontSize: '2.5rem' }}
         />
         <Skeleton
           variant='text'
           animation='wave'
           width={'10%'}
-          sx={{ fontSize: '3rem' }}
+          sx={{ fontSize: '2.5rem' }}
         />
       </Box>
 
-      <Box component='div'>
+      <Box component='div' sx={{marginTop: 1}}>
         <Skeleton variant='text' animation='wave' />
         <Skeleton variant='text' animation='wave' sx={{ fontSize: '3rem' }} />
       </Box>
