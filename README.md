@@ -11,9 +11,12 @@
 
 <!-- FEATURES -->
 ## Features
-  * You can add Clean YouTube on your mobile home screen
-  * You can use Clean YouTube offline
-  * You can add a playlist to your favorite list
+  * User can add up to five playlist
+  * User can delete playlist
+  * User can add playlist to their favorites list
+  * User can delete playlist to their favorites list
+  * User can add Clean YouTube on their mobile home screen
+  * User can use Clean YouTube offline
 
 <!-- HOW TO RUN -->
 ## How to run
