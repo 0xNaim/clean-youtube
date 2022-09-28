@@ -51,14 +51,12 @@ const VideoPlayer = () => {
       playlistVideos[activeVideoIndex - 2]?.contentDetails?.videoId
     );
     setActiveVideoTitle(playlistVideos[activeVideoIndex - 2]?.title);
-    console.log('Prev -> ', activeVideoIndex);
   };
 
   const handleNext = () => {
     setVideoActiveIndex((prev) => prev + 1);
     setActiveVideoId(playlistVideos[activeVideoIndex]?.contentDetails?.videoId);
     setActiveVideoTitle(playlistVideos[activeVideoIndex]?.title);
-    console.log('Next -> ', activeVideoIndex);
   };
 
   const handleState = (index, videoId, title) => {
