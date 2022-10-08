@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePlaylistFromFavorite } from '../../redux/favorite/favoriteSlice';
-import Notify from '../../utils/Notify';
+import Notify from '../ui/notify/Notify';
 import SingleCard from '../single-card/SingleCard';
 import styles from './Favorites.module.scss';
 

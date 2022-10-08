@@ -99,6 +99,11 @@
         padding: 10px !important;
         margin-bottom: 3px;
         cursor: pointer !important;
+        transition: all .25s ease-out;
+
+        &:hover {
+          background: #dddddd8e;
+        }
 
         &__thumbnail {
           object-fit: cover !important;

@@ -4,7 +4,7 @@ import Carousel from 'react-multi-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFavoritePlaylist } from '../../redux/favorite/favoriteSlice';
 import { deletePlaylist } from '../../redux/playlist/playlistSlice';
-import Notify from '../../utils/Notify';
+import Notify from '../ui/notify/Notify';
 import SingleCard from '../single-card/SingleCard';
 import styles from './Playlists.module.scss';
 
