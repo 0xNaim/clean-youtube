@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePlaylistFromRecent } from '../../redux/recent/recentSlice';
-import Notify from '../../utils/Notify';
+import Notify from '../ui/notify/Notify';
 import SingleCard from '../single-card/SingleCard';
 import styles from './Recents.module.scss';
 

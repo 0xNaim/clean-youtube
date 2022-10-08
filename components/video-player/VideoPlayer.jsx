@@ -17,9 +17,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRecentPlaylist } from '../../redux/recent/recentSlice';
 import { fetchVideos } from '../../redux/videos/videosSlice';
-import SideVideoHead from '../loading/SideVideoHead';
-import SideVideoLoading from '../loading/SideVideoLoading';
-import VideoPlayerLoading from '../loading/VideoPlayerLoading';
+import SideVideoHead from '../ui/loading/SideVideoHead';
+import SideVideoLoading from '../ui/loading/SideVideoLoading';
+import VideoPlayerLoading from '../ui/loading/VideoPlayerLoading';
 import Player from '../player/Player';
 import styles from './VideoPlayer.module.scss';
 

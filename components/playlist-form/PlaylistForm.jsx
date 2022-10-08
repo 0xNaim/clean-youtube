@@ -10,7 +10,7 @@ import {
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPlaylist } from '../../redux/playlist/playlistSlice';
-import Notify from '../../utils/Notify';
+import Notify from '../ui/notify/Notify';
 import styles from './PlaylistForm.module.scss';
 
 const PlaylistForm = ({ open, handleClose }) => {
