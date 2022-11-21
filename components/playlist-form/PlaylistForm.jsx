@@ -52,7 +52,7 @@ const PlaylistForm = ({ open, handleClose }) => {
         if (response.meta.requestStatus === 'rejected') {
           setSuccessMessage('');
           setErrorMessage(
-            'There was an error occurred, please make sure your playlist link or id is valid'
+            'Invalid playlist link or id'
           );
           setOpenSnackbar(true);
         }
@@ -115,7 +115,7 @@ const PlaylistForm = ({ open, handleClose }) => {
             disableRipple
             disabled={!playlistId || isLoading}
           >
-            + Add Playlist
+            {isLoading ? 'Loading...' : '+ Add Playlist'}
           </Button>
         </DialogActions>
       </Dialog>
