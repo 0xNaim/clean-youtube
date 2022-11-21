@@ -112,7 +112,7 @@ const PlaylistForm = ({ open, handleClose }) => {
             disableRipple
             disabled={!playlistId || isLoading}
           >
-            + Add Playlist
+            {isLoading ? 'Loading...' : '+ Add Playlist'}
           </Button>
         </DialogActions>
       </Dialog>
