@@ -26,8 +26,6 @@ const PlaylistForm = ({ open, handleClose }) => {
     setPlaylistId(playlistId?.split('&')[1]?.split('list=')[1]);
   }
 
-  console.log(playlistId);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccessMessage('');
