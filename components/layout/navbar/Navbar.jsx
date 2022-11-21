@@ -4,6 +4,7 @@ import {
   AppBar,
   Box,
   Button,
+  Container,
   Divider,
   Drawer,
   IconButton,
@@ -11,7 +12,6 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  Toolbar,
   Tooltip,
   Typography,
 } from '@mui/material';
@@ -33,9 +33,9 @@ const Navbar = () => {
         component='nav'
         position='static'
         className={styles.navbar}
-        sx={{ paddingY: { xs: 0, md: 1.5 } }}
+        sx={{ paddingY: { xs: 1, md: 1.5 } }}
       >
-        <Toolbar>
+        <Container maxWidth='xl' sx={{ display: 'flex', alignItems: 'center' }}>
           <Box component='div'>
             <Link href='/'>
               <a className={styles.navbar__link}>
@@ -103,7 +103,7 @@ const Navbar = () => {
           >
             <MenuIcon className={styles.navbar__menuIcon} />
           </IconButton>
-        </Toolbar>
+        </Container>
       </AppBar>
 
       <PlaylistForm open={openDialog} handleClose={toggleDialogHandler} />
