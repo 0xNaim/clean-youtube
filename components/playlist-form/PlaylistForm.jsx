@@ -23,9 +23,10 @@ const PlaylistForm = ({ open, handleClose }) => {
   const { playlists, isLoading } = useSelector((state) => state.playlists);
 
   if (playlistId.includes('youtube.com/watch?')) {
-    const match = /[&|\?]list=([a-zA-Z0-9_-]+)/gi.exec(playlistId);
-    setPlaylistId(match[1]);
+    setPlaylistId(playlistId?.split('&')[1]?.split('list=')[1]);
   }
+
+  console.log(playlistId);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,9 +52,7 @@ const PlaylistForm = ({ open, handleClose }) => {
         }
         if (response.meta.requestStatus === 'rejected') {
           setSuccessMessage('');
-          setErrorMessage(
-            'There was an error occurred, please make sure your playlist link or id is valid'
-          );
+          setErrorMessage('Invalid playlist id or link');
           setOpenSnackbar(true);
         }
       }
