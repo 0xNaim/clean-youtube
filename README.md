@@ -6,22 +6,22 @@
 
 <!-- PROJECT DESCRIPTIONS -->
 <p>
-  Clean youtube is a simple youtube playlist player. It was created for serious learners who really want to learn. When they watch YouTube videos, their attention is lost to other video suggestions that's why Clean YouTube comes. You can add a playlist via a playlist link or playlist id, then you can watch those playlists on Clean YouTube. I hope that you can seriously learn something.
+ Clean youtube is a simple youtube playlist player. It was created for serious learners who really want to learn from YouTube. When they watch YouTube videos, their attention is lost to other video suggestions that's why I make Clean YouTube. Users can watch any playlist without any distractions because it's Clean YouTube.
 </p>
 
 <!-- FEATURES -->
 ## Features
-  * User can add up to five playlist
-  * User can delete playlist
-  * User can add playlist to their favorites list
-  * User can delete playlist to their favorites list
-  * User can add Clean YouTube on their mobile home screen
-  * User can use Clean YouTube offline
+  * Users can add playlists via playlist links or playlist id
+  * Users can add playlists to their favorite lists and remove them from there
+  * Users can not add the same playlists more than once. Moreover, the validation was handled nice way. Ex. if you enter an invalid playlist link or id it will throw an error
+  * Users can remove playlists that he/she recently added
+  * Users can add up to five playlists
+  * Users can install applications on their desktop or mobile because it's a progressive web app
 
 <!-- HOW TO RUN -->
 ## How to run
 
-1. Clone this repository -
+1. Clone this repository
 ```sh
 https://github.com/0xNaim/clean-youtube.git
 ```
