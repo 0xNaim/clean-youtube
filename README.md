@@ -6,7 +6,7 @@
 
 <!-- PROJECT DESCRIPTIONS -->
 <p>
- Clean youtube is a simple youtube playlist player. It was created for serious learners who really want to learn from YouTube. When they watch YouTube videos, their attention is lost to other video suggestions that's why I make Clean YouTube. Users can watch any playlist without any distractions because it's Clean YouTube.
+ Clean YouTube is a platform designed for individuals who want to learn from YouTube without any distractions. It allows users to watch playlists without being interrupted by suggested videos or other distractions. The platform was built using technologies such as JavaScript, Next.js, Redux-Toolkit, React-Redux, Redux-Persist, Material-UI, and PWA (Progressive Web App). It is intended for serious learners who want to focus on their education and make the most of their time.
 </p>
 
 <!-- FEATURES -->
