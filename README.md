@@ -11,12 +11,13 @@
 
 <!-- FEATURES -->
 ## Features
-  * Users can add playlists via playlist links or playlist id
-  * Users can add playlists to their favorite lists and remove them from there
-  * Users can not add the same playlists more than once. Moreover, the validation was handled nice way. Ex. if you enter an invalid playlist link or id it will throw an error
-  * Users can remove playlists that he/she recently added
-  * Users can add up to five playlists
-  * Users can install applications on their desktop or mobile because it's a progressive web app
+  * Play YouTube playlists without distractions: Users can focus on learning from YouTube videos without the usual video suggestions or other distractions.
+  * Create and save playlists: Users can create and save their own playlists for easy access and organization.
+  * Progressive web app (PWA) capabilities: The app can be installed on a user's device and work offline or with low connectivity, just like a native app.
+  * Material design user interface: The app has a visually appealing and intuitive interface that follows Google's Material Design guidelines.
+  * Responsive design: The app is designed to work well on a variety of devices, including smartphones and tablets.
+  * Built with modern web technologies: The app is built using JavaScript, Next.js, React-Redux, and other modern web technologies.
+  * State management with Redux-Toolkit and Redux-Persist: The app uses Redux-Toolkit and Redux-Persist to manage application state and persist data across sessions.
 
 <!-- HOW TO RUN -->
 ## How to run
